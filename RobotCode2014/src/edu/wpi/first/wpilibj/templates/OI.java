@@ -1,6 +1,7 @@
 
 package edu.wpi.first.wpilibj.templates;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 
@@ -9,11 +10,12 @@ import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+    private static final int JOYSTICK_PORT = 1;
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
-    // Joystick stick = new Joystick(port);
+    Joystick joystick = new Joystick(JOYSTICK_PORT);
     // Button button = new JoystickButton(stick, buttonNumber);
     
     // Another type of button you can create is a DigitalIOButton, which is
@@ -40,5 +42,11 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
+    
+    
+    //Returns the joystick that controls driving
+    public Joystick getJoystick() {
+        return joystick;
+    }
 }
 
