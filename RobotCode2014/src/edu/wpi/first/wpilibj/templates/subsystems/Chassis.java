@@ -5,7 +5,7 @@
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.templates.RBDrive;
+import edu.wpi.first.wpilibj.RobotDrive;
 
 /**
  *
@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.templates.RBDrive;
 public class Chassis {
     //new RBDrive
 
-    public static RBDrive drive;
+    public static RobotDrive drive;
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
@@ -26,7 +26,7 @@ public class Chassis {
      */
     public Chassis(int frontLeftMotor, int rearLeftMotor, int frontRightMotor, int rearRightMotor) {
         //Create new robot drive class with pin values for all four motors
-        drive = new RBDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+        drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
     }
