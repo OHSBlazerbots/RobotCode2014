@@ -6,12 +6,14 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 
 /**
  *
  * @author sgoldman
  */
-public class Chassis {
+public class Chassis extends Subsystem {
     //new RBDrive
 
     public static RobotDrive drive;
@@ -33,10 +35,15 @@ public class Chassis {
 
     /**
      * Command the chassis to drive with the joystick.
-     *     
+     *
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
         drive.arcadeDrive(joystick.getY(), -joystick.getX());
+    }
+
+    protected void initDefaultCommand() {
+        //Starts driving the robot with this non terminating command
+        setDefaultCommand(new DriveWithJoystick());
     }
 }
