@@ -42,6 +42,9 @@ public class Chassis extends Subsystem {
         drive.arcadeDrive(joystick.getY(), -joystick.getX());
     }
 
+    /**
+     * Starts drive with joystick as the default command
+     */
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
         setDefaultCommand(new DriveWithJoystick());
