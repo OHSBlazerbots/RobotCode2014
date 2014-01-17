@@ -21,6 +21,8 @@ public class GetNetworkData extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        double cogArea = network.getCOGArea();
+        System.out.println("Ball COG: " + cogArea);
     }
 
     // Make this return true when this Command no longer needs to run execute()
