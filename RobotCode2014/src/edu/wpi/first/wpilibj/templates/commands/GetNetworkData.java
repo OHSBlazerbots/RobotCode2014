@@ -4,6 +4,7 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
+
 /**
  *
  * @author sgoldman
@@ -20,9 +21,11 @@ public class GetNetworkData extends CommandBase {
     }
 
     // Called repeatedly when this Command is scheduled to run
+    // Get COG x and y
     protected void execute() {
-        double cogArea = network.getCOGArea();
-        System.out.println("Ball COG: " + cogArea);
+        double var1 = network.getNetworkVariable("COG_X");
+        double var2 = network.getNetworkVariable("COG_Y");
+        System.out.println("Ball X: " + var1 + " Ball Y: " + var2);
     }
 
     // Make this return true when this Command no longer needs to run execute()
