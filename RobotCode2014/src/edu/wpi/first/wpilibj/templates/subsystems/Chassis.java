@@ -39,7 +39,7 @@ public class Chassis extends Subsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
-        drive.arcadeDrive(joystick.getY(), -joystick.getX());
+        drive.arcadeDrive(-joystick.getY(), -joystick.getX());
     }
 
     /**
