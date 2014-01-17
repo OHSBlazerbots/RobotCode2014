@@ -35,9 +35,15 @@ public class Network extends Subsystem{
         setDefaultCommand(new GetNetworkData());
     }
     
-    public double getCOGArea() {
+    /**
+     * Returns a type double variable from RoboRealm 
+     * 
+     * @param s
+     * @return double
+     */
+    public double getNetworkVariable(String s) {
         try {
-            return server.getNumber("COG_AREA");
+            return server.getNumber(s);
         }
         catch (TableKeyNotDefinedException exp){
             return 0;
