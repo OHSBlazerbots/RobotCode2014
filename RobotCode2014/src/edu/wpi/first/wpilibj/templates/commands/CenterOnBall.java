@@ -12,7 +12,8 @@ public class CenterOnBall extends CommandBase {
     
     public CenterOnBall() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(network);
+        requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,6 +22,19 @@ public class CenterOnBall extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        double x = network.getNetworkVariable("COG_X");
+        if(x > 340)
+        {
+            chassis.drive(0, 1);
+        }
+        else if(x < 300)
+        {
+            chassis.drive(0, -1);
+        }
+        else
+        {
+            chassis.drive(0, 0);
+        }
     }
 
     // Make this return true when this Command no longer needs to run execute()
