@@ -25,11 +25,11 @@ public class CenterOnBall extends CommandBase {
         double x = network.getNetworkVariable("COG_X");
         if(x > 340)
         {
-            chassis.drive(0, 1);
+            chassis.drive(.25, 0);
         }
         else if(x < 300)
         {
-            chassis.drive(0, -1);
+            chassis.drive(-.25, 0);
         }
         else
         {
