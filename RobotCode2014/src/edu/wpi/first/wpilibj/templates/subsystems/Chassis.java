@@ -17,6 +17,13 @@ public class Chassis extends Subsystem {
     //new RBDrive
 
     public static RobotDrive drive;
+    
+    // Determines what type of driving, (auto, joystick...) we are doing
+    // Joystick = 0
+    // Auto = 1
+    // Ball Track  = 2
+    
+    private static int driveState;
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
@@ -31,6 +38,7 @@ public class Chassis extends Subsystem {
         drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
+        this.driveState = 0;
     }
 
     /**
@@ -47,6 +55,6 @@ public class Chassis extends Subsystem {
      */
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
-        setDefaultCommand(new DriveWithJoystick());
+        setDefaultCommand(new Driving());
     }
 }
