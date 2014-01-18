@@ -25,7 +25,7 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
  */
 public class RobotTemplate extends IterativeRobot {
 
-    Command autoCommand;
+    Autonomous autoCommand;
     
     /**
      * This function is run when the robot is first started up and should be
@@ -33,7 +33,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        autoCommand = new Autonomous();
+        
 
         // Initialize all subsystems
         CommandBase.init();
@@ -41,14 +41,16 @@ public class RobotTemplate extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        autoCommand.start();
+        autoCommand = new Autonomous();
+        autoCommand.execute();
+        
     }
-
+    
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        Scheduler.getInstance().run();
+        //Scheduler.getInstance().run();
     }
 
     public void teleopInit() {
@@ -56,7 +58,7 @@ public class RobotTemplate extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        //autonomousCommand.cancel();
+        //autoCommand.cancel();
     }
 
     /**

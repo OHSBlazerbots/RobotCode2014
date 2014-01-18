@@ -5,25 +5,27 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import java.util.Timer;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  *
  * @author jmuller4
  */
-public class Autonomous extends CommandBase{
+public class Autonomous extends CommandBase {
 
     protected void initialize() {
         requires(chassis);
     }
 
-    protected void execute() {
-        chassis.drive(0, .5);
-        try {
-            new Timer().wait(1000);
-        } catch (InterruptedException ex) {
-        }
+    public void execute() {
+        System.out.println("Starting");
+        chassis.drive(0, -.5);
+        System.out.println("Started");
+        new Timer().delay(1);
+
+        System.out.println("Stopping");
         chassis.drive(0, 0);
+        System.out.println("Stopped");
     }
 
     protected boolean isFinished() {
@@ -35,5 +37,5 @@ public class Autonomous extends CommandBase{
 
     protected void interrupted() {
     }
-    
+
 }
