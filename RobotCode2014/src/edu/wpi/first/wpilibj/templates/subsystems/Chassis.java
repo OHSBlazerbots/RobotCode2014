@@ -28,7 +28,7 @@ public class Chassis extends Subsystem {
      */
     public Chassis(int frontLeftMotor, int rearLeftMotor, int frontRightMotor, int rearRightMotor) {
         //Create new robot drive class with pin values for all four motors
-        drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+        drive = new RobotDrive(frontLeftMotor, frontRightMotor);
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
     }
@@ -39,7 +39,7 @@ public class Chassis extends Subsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
-        drive.arcadeDrive(-joystick.getY(), -joystick.getX());
+        drive.arcadeDrive(-joystick.getX(), joystick.getY());
     }
 
     /**

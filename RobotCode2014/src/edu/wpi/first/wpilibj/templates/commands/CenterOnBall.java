@@ -4,16 +4,15 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
-
 /**
  *
  * @author sgoldman
  */
-public class GetNetworkData extends CommandBase {
+public class CenterOnBall extends CommandBase {
     
-    public GetNetworkData() {
-        //we need a network to get network data
-        requires(network);
+    public CenterOnBall() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,11 +20,7 @@ public class GetNetworkData extends CommandBase {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    // Get COG x and y
     protected void execute() {
-        double var1 = network.getNetworkVariable("COG_X");
-        double var2 = network.getNetworkVariable("COG_Y");
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
