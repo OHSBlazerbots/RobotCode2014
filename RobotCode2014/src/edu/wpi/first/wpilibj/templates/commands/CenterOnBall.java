@@ -29,7 +29,7 @@ public class CenterOnBall extends CommandBase {
         }
         else if(x < 300)
         {
-            chassis.drive(-.25, 0);
+            chassis.drive(-.25, 0;)
         }
         else
         {
