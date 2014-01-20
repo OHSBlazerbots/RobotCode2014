@@ -23,14 +23,19 @@ public class CenterOnBall extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
         double x = network.getNetworkVariable("COG_X");
+        // If ball is on the right side of the screen, turn right
+        
         if(x > 340)
         {
-            chassis.drive(.25, 0);
+            chassis.drive(-.4, 0);
         }
+        // If it is on the left side of the screen, turn left
         else if(x < 300)
         {
-            chassis.drive(-.25, 0);
+            //Left side is faster because these motors appear to be weaker
+            chassis.drive(.4, 0);
         }
+        // Otherwise, it is pretty much center, so don't more
         else
         {
             chassis.drive(0, 0);

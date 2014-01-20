@@ -43,7 +43,7 @@ public class Network extends Subsystem{
      */
     public double getNetworkVariable(String s) {
         try {
-            return server.getNumber(s);
+            return server.getNumber(s, 0);
         }
         catch (TableKeyNotDefinedException exp){
             return 0;
