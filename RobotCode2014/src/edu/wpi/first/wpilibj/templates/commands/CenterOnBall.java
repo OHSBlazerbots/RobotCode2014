@@ -9,7 +9,7 @@ package edu.wpi.first.wpilibj.templates.commands;
  * @author sgoldman
  */
 public class CenterOnBall extends CommandBase {
-    
+
     public CenterOnBall() {
         // Use requires() here to declare subsystem dependencies
         requires(network);
@@ -24,20 +24,22 @@ public class CenterOnBall extends CommandBase {
     protected void execute() {
         double x = network.getNetworkVariable("COG_X");
         // If ball is on the right side of the screen, turn right
-        
-        if(x > 340)
-        {
-            chassis.drive(-.4, 0);
-        }
-        // If it is on the left side of the screen, turn left
-        else if(x < 300)
-        {
+        double xv = 0.0;
+        if (x > 340) {
+            xv = -.4;
+        } // If it is on the left side of the screen, turn left
+        else if (x < 300) {
             //Left side is faster because these motors appear to be weaker
-            chassis.drive(.4, 0);
+            xv = .4;
+        } // Otherwise, it is pretty much center, so don't more
+        else {
+            xv = 0.0;
         }
-        // Otherwise, it is pretty much center, so don't more
-        else
-        {
+
+        double a = network.getNetworkVariable("COG_AREA");
+        if (network.getNetworkVariable("CIRCLES_COUNT") > 0&& a / (480 * 640) < .9) {
+                chassis.drive(xv, -.5);
+        } else {
             chassis.drive(0, 0);
         }
     }

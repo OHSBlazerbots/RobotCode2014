@@ -14,13 +14,14 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 
 /**
- *nn
+ *
  * @author sgoldman
  */
 public class Chassis extends PIDSubsystem {
     //new RBDrive
 
-    public static RobotDrive drive = new RobotDrive(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR);;
+    public static RobotDrive drive = new RobotDrive(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR);
+    ;
     
     // Determines what type of driving, (auto, joystick...) we are doing
     // Joystick = 0
@@ -38,12 +39,16 @@ public class Chassis extends PIDSubsystem {
      * @param rearRightMotor
      */
     public Chassis(int frontLeftMotor, int rearLeftMotor, int frontRightMotor, int rearRightMotor) {
-        super("CHASSIS", 1.0, 0.0, 0.0);
+        super("CHASSIS", 10.0, 5.0, 1.0);
+        setSetpoint(320);
+        setPercentTolerance(7);
         getPIDController().setContinuous(false);
         getPIDController().setInputRange(0, 640);
         getPIDController().setOutputRange(-.75, .75);
+        getPIDController().disable();
+
         //Create new robot drive class with pin values for all four motors
-        drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+        //drive = new RobotDrive(frontLeftMotor, frontRightMotor);
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
         this.driveState = 0;
@@ -57,17 +62,17 @@ public class Chassis extends PIDSubsystem {
     public void driveWithJoyStick(Joystick joystick) {
         drive.arcadeDrive(-joystick.getX(), joystick.getY());
     }
-    
-    public void drive(double moveValue, double turnValue){
+
+    public void drive(double moveValue, double turnValue) {
         drive.arcadeDrive(moveValue, turnValue);
     }
 
     /**
-     * Starts drive with joystick as the default command
-    l */
+     * Starts drive with joystick as the default command l
+     */
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
-        setDefaultCommand(new DriveWithJoystick());
+        setDefaultCommand(new CenterOnBall());
     }
 
     protected double returnPIDInput() {
@@ -75,21 +80,33 @@ public class Chassis extends PIDSubsystem {
     }
 
     protected void usePIDOutput(double d) {
-        drive.arcadeDrive(d, 0.0);
+        if (getPIDController().isEnable()) {
+            double a = CommandBase.network.getNetworkVariable("COG_AREA");
+            double dv = 0.0;
+            if (CommandBase.network.getNetworkVariable("CIRCLES_COUNT") > 0 && a / (480 * 640) < .9) {
+                dv = -1;
+            } else {
+                dv = 0;
+            }
+            if (!onTarget()) {
+                drive.arcadeDrive(d, dv);
+            } else {
+                drive.arcadeDrive(0, dv);
+            }
+        } else {
+            drive.arcadeDrive(0, 0);
+        }
     }
-    
-    public boolean getState()
-    {
+
+    public boolean getState() {
         return getPIDController().isEnable();
     }
-    
-    public void enableBallFollowing()
-    {
+
+    public void enableBallFollowing() {
         enable();
     }
-    
-    public void disableBallFollowing()
-    {
+
+    public void disableBallFollowing() {
         disable();
     }
 }
