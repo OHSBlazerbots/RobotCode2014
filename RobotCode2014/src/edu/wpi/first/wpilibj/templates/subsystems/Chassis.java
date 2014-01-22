@@ -72,7 +72,7 @@ public class Chassis extends PIDSubsystem {
      */
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
-        setDefaultCommand(new CenterOnBall());
+        setDefaultCommand(new DriveWithJoystick());
     }
 
     protected double returnPIDInput() {

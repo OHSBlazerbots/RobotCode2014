@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
 
 /**
@@ -12,6 +13,8 @@ import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+    
+    private CenterOnBall cob = new CenterOnBall();
     private static final int JOYSTICK_PORT = 1;
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
@@ -48,7 +51,7 @@ public class OI {
 
     public OI() {
         button = new JoystickButton(joystick, 4);
-        button.whenPressed(new ToggleBallFollowing());
+        button.toggleWhenPressed(cob);
     }
     
     
