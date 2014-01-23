@@ -18,13 +18,7 @@ public class ToggleBallFollowing extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        if(chassis.getState())
-        {
-            chassis.disableBallFollowing();
-        }
-        else{
-            chassis.enableBallFollowing();
-        }
+        chassis.disableBallFollowing();
     }
 
     // Called repeatedly when this Command is scheduled to run

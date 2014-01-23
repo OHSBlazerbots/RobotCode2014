@@ -60,11 +60,13 @@ public class Chassis extends PIDSubsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
-        drive.arcadeDrive(-joystick.getX(), joystick.getY());
+        
+            drive.arcadeDrive(-joystick.getX(), joystick.getY());
+        
     }
 
     public void drive(double moveValue, double turnValue) {
-        drive.arcadeDrive(moveValue, turnValue);
+            drive.arcadeDrive(moveValue, turnValue);
     }
 
     /**
@@ -98,15 +100,17 @@ public class Chassis extends PIDSubsystem {
         }
     }
 
-    public boolean getState() {
-        return getPIDController().isEnable();
+    public int getState() {
+        return driveState;
     }
 
     public void enableBallFollowing() {
-        enable();
+        driveState = 1;
     }
 
     public void disableBallFollowing() {
-        disable();
+        driveState = 0;
     }
+    
+    
 }

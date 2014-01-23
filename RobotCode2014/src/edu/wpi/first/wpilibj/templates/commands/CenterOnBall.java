@@ -18,6 +18,7 @@ public class CenterOnBall extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        chassis.enableBallFollowing();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,7 +38,7 @@ public class CenterOnBall extends CommandBase {
         }
 
         double a = network.getNetworkVariable("COG_AREA");
-        if (network.getNetworkVariable("CIRCLES_COUNT") > 0&& a / (480 * 640) < .9) {
+        if (network.getNetworkVariable("RGB_FILTER_GREEN_COUNT") < 60000 && a / (480 * 640) < .9) {
                 chassis.drive(xv, -.5);
         } else {
             chassis.drive(0, 0);
@@ -46,7 +47,7 @@ public class CenterOnBall extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return (chassis.getState() != 1);
     }
 
     // Called once after isFinished returns true

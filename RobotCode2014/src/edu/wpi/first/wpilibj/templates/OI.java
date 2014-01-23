@@ -23,7 +23,7 @@ public class OI {
     Joystick joystick = new Joystick(JOYSTICK_PORT);
     // Button button = new JoystickButton(stick, buttonNumber);
     Button button;
-    
+    Button followBall;
     // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
@@ -51,7 +51,9 @@ public class OI {
 
     public OI() {
         button = new JoystickButton(joystick, 4);
-        button.toggleWhenPressed(cob);
+        button.whenPressed(new ToggleBallFollowing());
+        followBall = new JoystickButton(joystick, 1);
+        followBall.whenPressed(new CenterOnBall());
     }
     
     
