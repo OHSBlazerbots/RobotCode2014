@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -21,13 +22,10 @@ public class Chassis extends PIDSubsystem {
     //new RBDrive
 
     public static RobotDrive drive = new RobotDrive(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR);
-    ;
-    
     // Determines what type of driving, (auto, joystick...) we are doing
     // Joystick = 0
     // Auto = 1
     // Ball Track  = 2
-    
     private static int driveState;
 
     /**
@@ -60,13 +58,18 @@ public class Chassis extends PIDSubsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
-        
-            drive.arcadeDrive(-joystick.getX(), joystick.getY());
-        
+        double turn = -joystick.getX();
+        double move = joystick.getY();
+        double ratio = SmartDashboard.getNumber("Speed Ratio", 1);
+        move /= ratio;
+        turn /= ratio;
+        SmartDashboard.putNumber("Turn Value", turn);
+        SmartDashboard.putNumber("Move Value", move);
+        drive.arcadeDrive(turn, move);
     }
 
     public void drive(double moveValue, double turnValue) {
-            drive.arcadeDrive(moveValue, turnValue);
+        drive.arcadeDrive(moveValue, turnValue);
     }
 
     /**
@@ -111,6 +114,4 @@ public class Chassis extends PIDSubsystem {
     public void disableBallFollowing() {
         driveState = 0;
     }
-    
-    
 }
