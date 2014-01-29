@@ -27,6 +27,7 @@ public class Chassis extends PIDSubsystem {
     // Auto = 1
     // Ball Track  = 2
     private static int driveState;
+    private static double ratio;
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
@@ -44,7 +45,7 @@ public class Chassis extends PIDSubsystem {
         getPIDController().setInputRange(0, 640);
         getPIDController().setOutputRange(-.75, .75);
         getPIDController().disable();
-
+        ratio = 1;
         //Create new robot drive class with pin values for all four motors
         //drive = new RobotDrive(frontLeftMotor, frontRightMotor);
         //Disables safety so that you can drive
@@ -60,7 +61,8 @@ public class Chassis extends PIDSubsystem {
     public void driveWithJoyStick(Joystick joystick) {
         double turn = -joystick.getX();
         double move = joystick.getY();
-        double ratio = SmartDashboard.getNumber("Speed Ratio", 1);
+        //double ratio = SmartDashboard.getNumber("Speed Ratio", 1);
+        //System.out.println("SR: " + ratio);
         move /= ratio;
         turn /= ratio;
         SmartDashboard.putNumber("Turn Value", turn);
@@ -113,5 +115,17 @@ public class Chassis extends PIDSubsystem {
 
     public void disableBallFollowing() {
         driveState = 0;
+    }
+
+    public void incrementRatio() {
+        if (ratio < 2.5) {
+            ratio += .5;
+        }
+    }
+
+    public void decrementRatio() {
+        if (ratio > 1) {
+            ratio -= .5;
+        }
     }
 }

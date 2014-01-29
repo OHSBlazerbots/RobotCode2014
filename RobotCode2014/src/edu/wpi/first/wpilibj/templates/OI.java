@@ -1,4 +1,3 @@
-
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -6,6 +5,8 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
+import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
+import edu.wpi.first.wpilibj.templates.commands.IncrementDriveRatio;
 import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
 
 /**
@@ -13,53 +14,53 @@ import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    
+
     private CenterOnBall cob = new CenterOnBall();
     private static final int JOYSTICK_PORT = 1;
     //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
+    // One type of stopBallFollowing is a joystick stopBallFollowing which is any stopBallFollowing on a joystick.
+    // You create one by telling it which joystick it's on and which stopBallFollowing
     // number it is.
     Joystick joystick = new Joystick(JOYSTICK_PORT);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    Button button;
+    // Button stopBallFollowing = new JoystickButton(stick, buttonNumber);
+    Button stopBallFollowing;
     Button followBall;
-    // Another type of button you can create is a DigitalIOButton, which is
-    // a button or switch hooked up to the cypress module. These are useful if
+    Button iRatio;
+    Button dRatio;
+    // Another type of stopBallFollowing you can create is a DigitalIOButton, which is
+    // a stopBallFollowing or switch hooked up to the cypress module. These are useful if
     // you want to build a customized operator interface.
-    // Button button = new DigitalIOButton(1);
-    
+    // Button stopBallFollowing = new DigitalIOButton(1);
+
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
     // commands the same as any other Button.
-    
     //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
+    // Once you have a stopBallFollowing, it's trivial to bind it to a stopBallFollowing in one of
     // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
+    // Start the command when the stopBallFollowing is pressed and let it run the command
     // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
+    // stopBallFollowing.whenPressed(new ExampleCommand());
+    // Run the command while the stopBallFollowing is being held down and interrupt it once
+    // the stopBallFollowing is released.
+    // stopBallFollowing.whileHeld(new ExampleCommand());
+    // Start the command when the stopBallFollowing is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
-
+    // stopBallFollowing.whenReleased(new ExampleCommand());
     public OI() {
-        button = new JoystickButton(joystick, 4);
-        button.whenPressed(new ToggleBallFollowing());
+        stopBallFollowing = new JoystickButton(joystick, 4);
+        stopBallFollowing.whenPressed(new ToggleBallFollowing());
         followBall = new JoystickButton(joystick, 1);
         followBall.whenPressed(new CenterOnBall());
+        iRatio = new JoystickButton(joystick, 6);
+        iRatio.whenPressed(new IncrementDriveRatio());
+        dRatio = new JoystickButton(joystick, 5);
+        dRatio.whenPressed(new DecrementDriveRatio());
+        
     }
-    
-    
+
     //Returns the joystick that controls driving
     public Joystick getJoystick() {
         return joystick;
     }
 }
-
