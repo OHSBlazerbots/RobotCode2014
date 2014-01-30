@@ -4,10 +4,13 @@
  */
 package edu.wpi.first.wpilibj.templates.subsystems;
 
+import edu.wpi.first.wpilibj.Accelerometer;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
@@ -28,7 +31,11 @@ public class Chassis extends PIDSubsystem {
     // Ball Track  = 2
     private static int driveState;
     private static double ratio;
-
+    private boolean driveStraight;
+    private boolean onlyTurn;
+    private Gyro gyro;
+    private Accelerometer accelerometerX;
+    private Accelerometer accelerometerY;
     /**
      * Create an instance of the chassis class with the appropriate motors.
      *
@@ -46,10 +53,19 @@ public class Chassis extends PIDSubsystem {
         getPIDController().setOutputRange(-.75, .75);
         getPIDController().disable();
         ratio = 1;
+        driveStraight = false;
+        onlyTurn = false;
         //Create new robot drive class with pin values for all four motors
         //drive = new RobotDrive(frontLeftMotor, frontRightMotor);
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
+        
+        gyro = new Gyro(1)/*(RobotMap.GYRO_PORT, 2);*/;
+        accelerometerX = new Accelerometer(4);
+        LiveWindow.addSensor("GyroAccelerometer", "Accelerometer X", accelerometerX);
+        accelerometerY = new Accelerometer(5);
+        LiveWindow.addSensor("GyroAccelerometer", "Accelerometer Y", accelerometerY); 
+        
         this.driveState = 0;
     }
 
@@ -65,6 +81,14 @@ public class Chassis extends PIDSubsystem {
         //System.out.println("SR: " + ratio);
         move /= ratio;
         turn /= ratio;
+        if(onlyTurn)
+        {
+            move = 0;
+        }
+        if(driveStraight)
+        {
+            turn = 0;
+        }
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
         drive.arcadeDrive(turn, move);
