@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.templates.commands.GoToSetPoint;
+import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
 
 /**
  *
@@ -36,6 +38,7 @@ public class Chassis extends PIDSubsystem {
     private Gyro gyro;
     private Accelerometer accelerometerX;
     private Accelerometer accelerometerY;
+    private double setPoint;
     /**
      * Create an instance of the chassis class with the appropriate motors.
      *
@@ -49,7 +52,7 @@ public class Chassis extends PIDSubsystem {
         setSetpoint(320);
         setPercentTolerance(7);
         getPIDController().setContinuous(false);
-        getPIDController().setInputRange(0, 640);
+        getPIDController().setInputRange(0, 360);
         getPIDController().setOutputRange(-.75, .75);
         getPIDController().disable();
         ratio = 1;
@@ -60,13 +63,15 @@ public class Chassis extends PIDSubsystem {
         //Disables safety so that you can drive
         drive.setSafetyEnabled(false);
         
-        gyro = new Gyro(1)/*(RobotMap.GYRO_PORT, 2);*/;
+        gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
         accelerometerX = new Accelerometer(4);
-        LiveWindow.addSensor("GyroAccelerometer", "Accelerometer X", accelerometerX);
         accelerometerY = new Accelerometer(5);
-        LiveWindow.addSensor("GyroAccelerometer", "Accelerometer Y", accelerometerY); 
-        
+        gyro.startLiveWindowMode();
+        accelerometerX.startLiveWindowMode();
+        accelerometerY.startLiveWindowMode();
         this.driveState = 0;
+        setPoint = 0.0;
+                
     }
 
     /**
@@ -104,10 +109,11 @@ public class Chassis extends PIDSubsystem {
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
         setDefaultCommand(new DriveWithJoystick());
+        //setDefaultCommand(new PutGyroAccelData());
     }
 
     protected double returnPIDInput() {
-        return CommandBase.network.getNetworkVariable("COG_X");
+        return gyro.pidGet();
     }
 
     protected void usePIDOutput(double d) {
@@ -151,5 +157,80 @@ public class Chassis extends PIDSubsystem {
         if (ratio > 1) {
             ratio -= .5;
         }
+    }
+    
+    public double getGyroAngle()
+    {
+        double angle = gyro.getAngle() % (360);
+        if (angle < 0.0)
+        {
+            angle += 360;
+        }
+        return angle;
+    }
+    
+    public double[] getAcceleration()
+    {
+        double[] a = new double[2];
+        a[0] = accelerometerX.getAcceleration();
+        a[1] = accelerometerY.getAcceleration();
+        return a;
+    }
+    
+    public void toggleDriveStraight()
+    {
+        driveStraight = !driveStraight;
+    }
+    
+    public void toggleOnlyTurn()
+    {
+        onlyTurn = !onlyTurn;
+    }
+    
+    public void setGyroSetpoint()
+    {
+        setPoint = getGyroAngle();
+        System.out.println(setPoint);
+        
+    }
+    
+    public void goToSetPoint()
+    {
+        driveState = 2;
+    }
+    
+    public int sign(double value)
+    {
+        if(value == 0)
+        {
+            //If it is 0, there is no sign
+            return 0;
+        }
+        else if(value > 0){
+            //If it is greater than 0, it is positive
+            return 1;
+        }
+        else{
+            //If it is not 0 or greater than zero, it is less than 0 and thus negative
+            return -1;
+        }
+    }
+    
+    public void stopGoingToSetPoint()
+    {
+        driveState = 0;
+    }
+    
+    public double getSetPoint()
+    {
+        return setPoint;
+    }
+    
+    public void turn(double d)
+    {
+        setPoint = (getGyroAngle() + d) % 360;
+        System.out.println(getGyroAngle());
+        System.out.println(setPoint);
+        driveState = 2;
     }
 }
