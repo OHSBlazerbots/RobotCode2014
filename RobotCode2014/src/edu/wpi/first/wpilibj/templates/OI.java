@@ -56,7 +56,6 @@ public class OI {
         iRatio.whenPressed(new IncrementDriveRatio());
         dRatio = new JoystickButton(joystick, 5);
         dRatio.whenPressed(new DecrementDriveRatio());
-        
     }
 
     //Returns the joystick that controls driving
