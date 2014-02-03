@@ -10,6 +10,7 @@ public class RobotMap {
     
     // For example to map the left and right motors, you could define the
     // following variables to use with your drivetrain subsystem.
+    //Final bot code
     public static final int FRONT_LEFT_MOTOR = 1;
     public static final int REAR_LEFT_MOTOR = 2;
     public static final int FRONT_RIGHT_MOTOR = 2;
