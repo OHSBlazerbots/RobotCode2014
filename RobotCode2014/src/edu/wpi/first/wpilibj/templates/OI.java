@@ -2,7 +2,6 @@ package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
@@ -29,24 +28,20 @@ public class OI {
     // One type of stopBallFollowing is a joystick stopBallFollowing which is any stopBallFollowing on a joystick.
     // You create one by telling it which joystick it's on and which stopBallFollowing
     // number it is.
-    Joystick joystick = new Joystick(JOYSTICK_PORT);
-    Joystick joystick2 = new Joystick(JOYSTICK2_PORT);
+    Joystick joystick = new Joystick(JOYSTICK_PORT),
+             joystick2 = new Joystick(JOYSTICK2_PORT);
     // Button stopBallFollowing = new JoystickButton(stick, buttonNumber);
-    Button stopBallFollowing;
-    Button followBall;
-    Button iRatio;
-    Button dRatio;
-    Button straightToggle;
-    Button turnToggle;
-    Button setSetpoint;
-    Button toggleSetpoint;
-    Button driveForward;
-    // Another type of stopBallFollowing you can create is a DigitalIOButton, which is
-    // a stopBallFollowing or switch hooked up to the cypress module. These are useful if
-    // you want to build a customized operator interface.
-    // Button stopBallFollowing = new DigitalIOButton(1);
-    private final JoystickButton turn;
-    private final JoystickButton square;
+    private final JoystickButton stopBallFollowing, 
+            followBall, 
+            iRatio, 
+            dRatio, 
+            straightToggle, 
+            turnToggle, 
+            setSetpoint,
+            toggleSetpoint,
+            driveForward,
+            turn,
+            square;
 
     // There are a few additional built in buttons you can use. Additionally,
     // by subclassing Button you can create custom triggers and bind those to
