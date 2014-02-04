@@ -19,59 +19,48 @@ import edu.wpi.first.wpilibj.templates.commands.Turn;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    private static final int JOYSTICK_PORT = 1, JOYSTICK2_PORT = 2;
-    
-    Joystick joystick = new Joystick(JOYSTICK_PORT),
-             joystick2 = new Joystick(JOYSTICK2_PORT);
-    private final JoystickButton stopBallFollowing, 
-            followBall, 
-            iRatio, 
-            dRatio, 
-            straightToggle, 
-            turnToggle, 
+
+    //The robot controllers
+    Joystick joystick = new Joystick(RobotMap.JOYSTICK_PORT),
+            joystick2 = new Joystick(RobotMap.JOYSTICK2_PORT);
+    //The buttons on the controllers
+    private final JoystickButton stopBallFollowing,
+            followBall,
+            iRatio,
+            dRatio,
+            straightToggle,
+            turnToggle,
             setSetpoint,
             toggleSetpoint,
             driveForward,
             turn,
             square;
 
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a stopBallFollowing, it's trivial to bind it to a stopBallFollowing in one of
-    // three ways:
-    // Start the command when the stopBallFollowing is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // stopBallFollowing.whenPressed(new ExampleCommand());
-    // Run the command while the stopBallFollowing is being held down and interrupt it once
-    // the stopBallFollowing is released.
-    // stopBallFollowing.whileHeld(new ExampleCommand());
-    // Start the command when the stopBallFollowing is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // stopBallFollowing.whenReleased(new ExampleCommand());
     public OI() {
+        //Instantiate all of the buttons
         stopBallFollowing = new JoystickButton(joystick, 4);
-        stopBallFollowing.whenPressed(new ToggleBallFollowing());
         followBall = new JoystickButton(joystick, 1);
-        followBall.whenPressed(new CenterOnBall());
         iRatio = new JoystickButton(joystick, 6);
-        iRatio.whenPressed(new IncrementDriveRatio());
         dRatio = new JoystickButton(joystick, 5);
-        dRatio.whenPressed(new DecrementDriveRatio());
         straightToggle = new JoystickButton(joystick, 2);
-        straightToggle.whenPressed(new ToggleStraight());
         turnToggle = new JoystickButton(joystick, 3);
-        turnToggle.whenPressed(new ToggleTurn());
         setSetpoint = new JoystickButton(joystick, 8);
-        setSetpoint.whenPressed(new SetSetpointCurrent());
         toggleSetpoint = new JoystickButton(joystick, 7);
-        toggleSetpoint.whenPressed(new ToggleAutoTurn());
         driveForward = new JoystickButton(joystick2, 1);
-        driveForward.whenPressed(new DriveForward(2));
         turn = new JoystickButton(joystick2, 2);
-        turn.whenPressed(new Turn(85));
         square = new JoystickButton(joystick2, 3);
+
+        //Declare what the buttons do
+        stopBallFollowing.whenPressed(new ToggleBallFollowing());
+        followBall.whenPressed(new CenterOnBall());
+        iRatio.whenPressed(new IncrementDriveRatio());
+        dRatio.whenPressed(new DecrementDriveRatio());
+        straightToggle.whenPressed(new ToggleStraight());
+        turnToggle.whenPressed(new ToggleTurn());
+        setSetpoint.whenPressed(new SetSetpointCurrent());
+        toggleSetpoint.whenPressed(new ToggleAutoTurn());
+        driveForward.whenPressed(new DriveForward(2));
+        turn.whenPressed(new Turn(85));
         square.whenPressed(new DriveInSquare());
     }
 
