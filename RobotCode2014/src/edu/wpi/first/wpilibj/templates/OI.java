@@ -1,7 +1,6 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
@@ -20,17 +19,10 @@ import edu.wpi.first.wpilibj.templates.commands.Turn;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
-    private CenterOnBall cob = new CenterOnBall();
-    private static final int JOYSTICK_PORT = 1;
-    private static final int JOYSTICK2_PORT = 2;
-    //// CREATING BUTTONS
-    // One type of stopBallFollowing is a joystick stopBallFollowing which is any stopBallFollowing on a joystick.
-    // You create one by telling it which joystick it's on and which stopBallFollowing
-    // number it is.
+    private static final int JOYSTICK_PORT = 1, JOYSTICK2_PORT = 2;
+    
     Joystick joystick = new Joystick(JOYSTICK_PORT),
              joystick2 = new Joystick(JOYSTICK2_PORT);
-    // Button stopBallFollowing = new JoystickButton(stick, buttonNumber);
     private final JoystickButton stopBallFollowing, 
             followBall, 
             iRatio, 
