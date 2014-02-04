@@ -9,15 +9,9 @@ import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.templates.RobotMap;
-import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.templates.commands.GoToSetPoint;
-import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
 
 /**
  *
@@ -26,18 +20,16 @@ import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
 public class Chassis extends PIDSubsystem {
     //new RBDrive
 
-    public static RobotDrive drive = new RobotDrive(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR);
+    public static RobotDrive drive;
     // Determines what type of driving, (auto, joystick...) we are doing
     // Joystick = 0
     // Auto = 1
     // Ball Track  = 2
     private static int driveState;
     private static double ratio;
-    private boolean driveStraight;
-    private boolean onlyTurn;
+    private boolean driveStraight, onlyTurn;
     private Gyro gyro;
-    private Accelerometer accelerometerX;
-    private Accelerometer accelerometerY;
+    private Accelerometer accelerometerX, accelerometerY;
     private double setPoint;
     /**
      * Create an instance of the chassis class with the appropriate motors.
@@ -47,7 +39,7 @@ public class Chassis extends PIDSubsystem {
      * @param frontRightMotor
      * @param rearRightMotor
      */
-    public Chassis(int frontLeftMotor, int rearLeftMotor, int frontRightMotor, int rearRightMotor) {
+    public Chassis(int frontLeftMotor, int frontRightMotor, int gyroPort) {
         super("CHASSIS", 10.0, 5.0, 1.0);
         setSetpoint(320);
         setPercentTolerance(7);
@@ -58,20 +50,20 @@ public class Chassis extends PIDSubsystem {
         ratio = 1;
         driveStraight = false;
         onlyTurn = false;
-        //Create new robot drive class with pin values for all four motors
-        //drive = new RobotDrive(frontLeftMotor, frontRightMotor);
-        //Disables safety so that you can drive
+        //Create new robot drive class with pin values for the two motors
+        drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+        //Disables safety so we can drive
         drive.setSafetyEnabled(false);
-        
-        gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
+        //Instatiates new gyroscope
+        gyro = new Gyro(gyroPort)/*(RobotMap.GYRO_PORT, 2);*/;
         accelerometerX = new Accelerometer(4);
         accelerometerY = new Accelerometer(5);
         gyro.startLiveWindowMode();
         accelerometerX.startLiveWindowMode();
         accelerometerY.startLiveWindowMode();
-        this.driveState = 0;
+        //Arcade drive
+        Chassis.driveState = 0;
         setPoint = 0.0;
-                
     }
 
     /**
@@ -80,26 +72,32 @@ public class Chassis extends PIDSubsystem {
      * @param joystick
      */
     public void driveWithJoyStick(Joystick joystick) {
+        //Turn is the reverse of x
         double turn = -joystick.getX();
+        //Drive is the y
         double move = joystick.getY();
-        //double ratio = SmartDashboard.getNumber("Speed Ratio", 1);
-        //System.out.println("SR: " + ratio);
+        //Slow the robot down with the ratio
         move /= ratio;
         turn /= ratio;
+        //Don't drive f/b if only turning is desired
         if(onlyTurn)
         {
             move = 0;
         }
+        //Don't turn if only f/b driving is desired
         if(driveStraight)
         {
             turn = 0;
         }
+        //Put drive values on the smart dashboard
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
+        //Send the command to drive with the values
         drive.arcadeDrive(turn, move);
     }
 
     public void drive(double moveValue, double turnValue) {
+        //Custom value driving
         drive.arcadeDrive(moveValue, turnValue);
     }
 
@@ -109,17 +107,17 @@ public class Chassis extends PIDSubsystem {
     protected void initDefaultCommand() {
         //Starts driving the robot with this non terminating command
         setDefaultCommand(new DriveWithJoystick());
-        //setDefaultCommand(new PutGyroAccelData());
     }
 
+    //<editor-fold defaultstate="collapsed" desc="PID Stuff - not used">
     protected double returnPIDInput() {
         return gyro.pidGet();
     }
-
+    
     protected void usePIDOutput(double d) {
         if (getPIDController().isEnable()) {
             double a = CommandBase.network.getNetworkVariable("COG_AREA");
-            double dv = 0.0;
+            double dv;
             if (CommandBase.network.getNetworkVariable("CIRCLES_COUNT") > 0 && a / (480 * 640) < .9) {
                 dv = -1;
             } else {
@@ -134,31 +132,38 @@ public class Chassis extends PIDSubsystem {
             drive.arcadeDrive(0, 0);
         }
     }
+    //</editor-fold>
 
+    //Returns the current method of driving the robot
     public int getState() {
         return driveState;
     }
 
+    //Turns on ball tracking and following
     public void enableBallFollowing() {
         driveState = 1;
     }
 
+    //Turns off ball tracking and following
     public void disableBallFollowing() {
         driveState = 0;
     }
 
+    //Shifts up the ratio by .5 if it is less than 2.5 currently
     public void incrementRatio() {
         if (ratio < 2.5) {
             ratio += .5;
         }
     }
 
+    //Shifts down the ratio by .5 if it is currently greater than 1
     public void decrementRatio() {
         if (ratio > 1) {
             ratio -= .5;
         }
     }
     
+    //Converts the raw gyro angle to degrees and returns it
     public double getGyroAngle()
     {
         double angle = gyro.getAngle() % (360);
@@ -169,6 +174,9 @@ public class Chassis extends PIDSubsystem {
         return angle;
     }
     
+    //Returns a double array
+    //First number is x
+    //Second number is y
     public double[] getAcceleration()
     {
         double[] a = new double[2];
@@ -177,16 +185,19 @@ public class Chassis extends PIDSubsystem {
         return a;
     }
     
+    //Turns on and off just driving straight
     public void toggleDriveStraight()
     {
         driveStraight = !driveStraight;
     }
     
+    //Turns on and off just turning
     public void toggleOnlyTurn()
     {
         onlyTurn = !onlyTurn;
     }
     
+    //Sets the target angle to the current angle
     public void setGyroSetpoint()
     {
         setPoint = getGyroAngle();
@@ -194,11 +205,13 @@ public class Chassis extends PIDSubsystem {
         
     }
     
+    //Enables going to the target angle (setpoint)
     public void goToSetPoint()
     {
         driveState = 2;
     }
     
+    //Return the sign of the number, or 0 if it is 0
     public int sign(double value)
     {
         if(value == 0)
@@ -216,16 +229,19 @@ public class Chassis extends PIDSubsystem {
         }
     }
     
+    //Halts the going to target angle
     public void stopGoingToSetPoint()
     {
         driveState = 0;
     }
     
+    //Returns the target angle
     public double getSetPoint()
     {
         return setPoint;
     }
     
+    //Set the target angle to d degrees farther than it currently is
     public void turn(double d)
     {
         setPoint = (getGyroAngle() + d) % 360;
