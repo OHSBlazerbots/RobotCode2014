@@ -21,7 +21,4 @@ public class RobotMap {
     // public static final int rangefinderPort = 1;
     // public static final int rangefinderModule = 1;
     public static int GYRO_PORT = 1;
-    
-    //The controller ports
-    public static final int JOYSTICK_PORT = 1, JOYSTICK2_PORT = 2;
 }
