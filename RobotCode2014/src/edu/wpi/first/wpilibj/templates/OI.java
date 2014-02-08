@@ -1,8 +1,6 @@
 package edu.wpi.first.wpilibj.templates;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
@@ -22,69 +20,47 @@ import edu.wpi.first.wpilibj.templates.commands.Turn;
  */
 public class OI {
 
-    private CenterOnBall cob = new CenterOnBall();
-    private static final int JOYSTICK_PORT = 1;
-    private static final int JOYSTICK2_PORT = 2;
-    //// CREATING BUTTONS
-    // One type of stopBallFollowing is a joystick stopBallFollowing which is any stopBallFollowing on a joystick.
-    // You create one by telling it which joystick it's on and which stopBallFollowing
-    // number it is.
-    Joystick joystick = new Joystick(JOYSTICK_PORT);
-    Joystick joystick2 = new Joystick(JOYSTICK2_PORT);
-    // Button stopBallFollowing = new JoystickButton(stick, buttonNumber);
-    Button stopBallFollowing;
-    Button followBall;
-    Button iRatio;
-    Button dRatio;
-    Button straightToggle;
-    Button turnToggle;
-    Button setSetpoint;
-    Button toggleSetpoint;
-    Button driveForward;
-    // Another type of stopBallFollowing you can create is a DigitalIOButton, which is
-    // a stopBallFollowing or switch hooked up to the cypress module. These are useful if
-    // you want to build a customized operator interface.
-    // Button stopBallFollowing = new DigitalIOButton(1);
-    private final JoystickButton turn;
-    private final JoystickButton square;
+    //The robot controllers
+    Joystick joystick = new Joystick(RobotMap.JOYSTICK_PORT),
+            joystick2 = new Joystick(RobotMap.JOYSTICK2_PORT);
+    //The buttons on the controllers
+    private final JoystickButton stopBallFollowing,
+            followBall,
+            iRatio,
+            dRatio,
+            straightToggle,
+            turnToggle,
+            setSetpoint,
+            toggleSetpoint,
+            driveForward,
+            turn,
+            square;
 
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a stopBallFollowing, it's trivial to bind it to a stopBallFollowing in one of
-    // three ways:
-    // Start the command when the stopBallFollowing is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // stopBallFollowing.whenPressed(new ExampleCommand());
-    // Run the command while the stopBallFollowing is being held down and interrupt it once
-    // the stopBallFollowing is released.
-    // stopBallFollowing.whileHeld(new ExampleCommand());
-    // Start the command when the stopBallFollowing is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // stopBallFollowing.whenReleased(new ExampleCommand());
     public OI() {
-        stopBallFollowing = new JoystickButton(joystick, 4); //y
-        stopBallFollowing.whenPressed(new ToggleBallFollowing()); 
-        followBall = new JoystickButton(joystick, 1); //a
+        //Instantiate all of the buttons
+        stopBallFollowing = new JoystickButton(joystick, 4);
+        followBall = new JoystickButton(joystick, 1);
+        iRatio = new JoystickButton(joystick, 6);
+        dRatio = new JoystickButton(joystick, 5);
+        straightToggle = new JoystickButton(joystick, 2);
+        turnToggle = new JoystickButton(joystick, 3);
+        setSetpoint = new JoystickButton(joystick, 8);
+        toggleSetpoint = new JoystickButton(joystick, 7);
+        driveForward = new JoystickButton(joystick2, 1);
+        turn = new JoystickButton(joystick2, 2);
+        square = new JoystickButton(joystick2, 3);
+
+        //Declare what the buttons do
+        stopBallFollowing.whenPressed(new ToggleBallFollowing());
         followBall.whenPressed(new CenterOnBall());
-        iRatio = new JoystickButton(joystick, 6); //rb
         iRatio.whenPressed(new IncrementDriveRatio());
-        dRatio = new JoystickButton(joystick, 5); //lb
         dRatio.whenPressed(new DecrementDriveRatio());
-        straightToggle = new JoystickButton(joystick, 2); //b
         straightToggle.whenPressed(new ToggleStraight());
-        turnToggle = new JoystickButton(joystick, 3); //x
         turnToggle.whenPressed(new ToggleTurn());
-        setSetpoint = new JoystickButton(joystick, 8); //start
         setSetpoint.whenPressed(new SetSetpointCurrent());
-        toggleSetpoint = new JoystickButton(joystick, 7); //back
         toggleSetpoint.whenPressed(new ToggleAutoTurn());
-        driveForward = new JoystickButton(joystick2, 1); //a
         driveForward.whenPressed(new DriveForward(2));
-        turn = new JoystickButton(joystick2, 2); //b
         turn.whenPressed(new Turn(85));
-        square = new JoystickButton(joystick2, 3); //x
         square.whenPressed(new DriveInSquare());
     }
 
