@@ -46,6 +46,7 @@ public class Chassis extends PIDSubsystem {
             tiltErrorY,
             distance;
     private AnalogChannel sonar;
+    
     /**
      * Create an instance of the chassis class with the appropriate motors.
      *
@@ -117,7 +118,7 @@ public class Chassis extends PIDSubsystem {
         SmartDashboard.putNumber("Move Value", move);
         if (getSonarDistance() < 24.0 && move < 0)  // If less than 24 inches away, and moving forward
         {
-            move = 0;
+            //move = 0;
         }
         drive.arcadeDrive(turn, move);
     }
@@ -156,22 +157,22 @@ public class Chassis extends PIDSubsystem {
     }
     
     protected void usePIDOutput(double d) {
-        if (getPIDController().isEnable()) {
-            double a = CommandBase.network.getNetworkVariable("COG_AREA");
-            double dv;
-            if (CommandBase.network.getNetworkVariable("CIRCLES_COUNT") > 0 && a / (480 * 640) < .9) {
-                dv = -1;
-            } else {
-                dv = 0;
-            }
-            if (!onTarget()) {
-                drive.arcadeDrive(d, dv);
-            } else {
-                drive.arcadeDrive(0, dv);
-            }
-        } else {
-            drive.arcadeDrive(0, 0);
-        }
+//        if (getPIDController().isEnable()) {
+//            double a = CommandBase.network.getNetworkVariable("COG_AREA");
+//            double dv;
+//            if (CommandBase.network.getNetworkVariable("CIRCLES_COUNT") > 0 && a / (480 * 640) < .9) {
+//                dv = -1;
+//            } else {
+//                dv = 0;
+//            }
+//            if (!onTarget()) {
+//                drive.arcadeDrive(d, dv);
+//            } else {
+//                drive.arcadeDrive(0, dv);
+//            }
+//        } else {
+//            drive.arcadeDrive(0, 0);
+//        }
     }
     //</editor-fold>
 
