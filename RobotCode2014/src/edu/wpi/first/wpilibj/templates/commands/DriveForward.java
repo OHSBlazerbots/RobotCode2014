@@ -18,18 +18,23 @@ public class DriveForward extends CommandBase{
     public DriveForward(double seconds) {
         requires(chassis);
         this.time = seconds;
+        System.out.println("DriveForward(" + seconds + ") created");
     }
 
     protected void initialize() {
+        System.out.println("DriveForward.initialize(" + this.time + ",start)");
         chassis.drive(0,-0.5);
         new Timer().delay(this.time);
         chassis.drive(0,0);
+        System.out.println("DriveForward.initialize(" + this.time + ",end)");
     }
 
     protected void execute() {
+        System.out.println("DriveForward.execute(" + this.time + ")");
     }
 
     protected boolean isFinished() {
+        System.out.println("DriveForward.isFinished(" + this.time + ")");
         return true;
     }
 

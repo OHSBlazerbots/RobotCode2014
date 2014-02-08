@@ -24,11 +24,11 @@ public class GoToSetPoint extends CommandBase {
     }
 
     protected void execute() {
-        System.out.println("Current Angle: " + chassis.getGyroAngle());
+        //System.out.println("Current Angle: " + chassis.getGyroAngle());
         SmartDashboard.putNumber("Current Angle: ", chassis.getGyroAngle());
         SmartDashboard.putNumber("Setpoint: ", chassis.getSetpoint());
         double error = SmartDashboard.getNumber("Error: ", 5);
-        System.out.println(error);
+        //System.out.println(error);
         double turn = chassis.getGyroAngle() - chassis.getSetPoint();
         if (turn < 0) {
             turn += 360;

@@ -16,15 +16,11 @@ public class DriveInSquare extends CommandGroup {
     public DriveInSquare() {
         addSequential(new DriveForward(2));
         addSequential(new Turn(85));
-        addSequential(new GoToSetPoint());
         addSequential(new DriveForward(2));
         addSequential(new Turn(85));
-        addSequential(new GoToSetPoint());
         addSequential(new DriveForward(2));
         addSequential(new Turn(85));
-        addSequential(new GoToSetPoint());
         addSequential(new DriveForward(2));
         addSequential(new Turn(85));
-        addSequential(new GoToSetPoint());
     }
 }

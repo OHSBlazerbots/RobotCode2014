@@ -27,6 +27,11 @@ public class DriveWithJoystick extends CommandBase {
     protected void execute() {
         chassis.driveWithJoyStick(oi.getJoystick());
         SmartDashboard.putNumber("Current Angle: ", chassis.getGyroAngle());
+        SmartDashboard.putNumber("X: ", chassis.getAcceleration()[0]);
+        SmartDashboard.putNumber("Y: ", chassis.getAcceleration()[1]);
+        SmartDashboard.putNumber("distanceX", chassis.getDistance()[0]);
+        SmartDashboard.putNumber("distanceY", chassis.getDistance()[1]);
+        SmartDashboard.putNumber("Sonar", chassis.getSonarDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.commands.GoToSetPoint;
 import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
+import edu.wpi.first.wpilibj.ADXL345_I2C;
+import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.templates.commands.GetDistance;
 
 /**
  *
@@ -36,9 +39,18 @@ public class Chassis extends PIDSubsystem {
     private boolean driveStraight;
     private boolean onlyTurn;
     private Gyro gyro;
-    private Accelerometer accelerometerX;
-    private Accelerometer accelerometerY;
-    private double setPoint;
+   //private Accelerometer accelerometerX;
+    //private Accelerometer accelerometerY;
+    private ADXL345_I2C accel;
+    private double setPoint,
+            velocityX,
+            velocityY, 
+            distanceX,
+            distanceY,
+            tiltErrorX,
+            tiltErrorY,
+            distance;
+    private AnalogChannel sonar;
     /**
      * Create an instance of the chassis class with the appropriate motors.
      *
@@ -56,6 +68,10 @@ public class Chassis extends PIDSubsystem {
         getPIDController().setOutputRange(-.75, .75);
         getPIDController().disable();
         ratio = 1;
+        velocityX = 0;
+        velocityY = 0;
+        distanceX = 0;
+        distanceY = 0;
         driveStraight = false;
         onlyTurn = false;
         //Create new robot drive class with pin values for all four motors
@@ -64,14 +80,18 @@ public class Chassis extends PIDSubsystem {
         drive.setSafetyEnabled(false);
         
         gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
-        accelerometerX = new Accelerometer(4);
-        accelerometerY = new Accelerometer(5);
+        //accelerometerX = new Accelerometer(2);
+        //accelerometerY = new Accelerometer(3);
         gyro.startLiveWindowMode();
-        accelerometerX.startLiveWindowMode();
-        accelerometerY.startLiveWindowMode();
+        //accelerometerX.startLiveWindowMode();
+        //accelerometerY.startLiveWindowMode();
+        accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
+        tiltErrorX = accel.getAcceleration(ADXL345_I2C.Axes.kX);
+        tiltErrorY = accel.getAcceleration(ADXL345_I2C.Axes.kY);
         this.driveState = 0;
         setPoint = 0.0;
-                
+        distance = 0.0;
+        sonar = new AnalogChannel(7);
     }
 
     /**
@@ -96,11 +116,31 @@ public class Chassis extends PIDSubsystem {
         }
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
+        if (getSonarDistance() < 24.0 && move < 0)  // If less than 24 inches away, and moving forward
+        {
+            move = 0;
+        }
         drive.arcadeDrive(turn, move);
     }
 
-    public void drive(double moveValue, double turnValue) {
-        drive.arcadeDrive(moveValue, turnValue);
+    public void drive(double move, double turn) {
+        move /= ratio;
+        turn /= ratio;
+        if(onlyTurn)
+        {
+            move = 0;
+        }
+        if(driveStraight)
+        {
+            turn = 0;
+        }
+        SmartDashboard.putNumber("Turn Value", turn);
+        SmartDashboard.putNumber("Move Value", move);
+        if(getSonarDistance() < 24.0 && move < 0)
+        {
+            move = 0;
+        }
+        drive.arcadeDrive(move, turn);
     }
 
     /**
@@ -172,9 +212,31 @@ public class Chassis extends PIDSubsystem {
     public double[] getAcceleration()
     {
         double[] a = new double[2];
-        a[0] = accelerometerX.getAcceleration();
-        a[1] = accelerometerY.getAcceleration();
+        a[0] = accel.getAcceleration(ADXL345_I2C.Axes.kX)  - tiltErrorX;
+        a[1] = accel.getAcceleration(ADXL345_I2C.Axes.kY)  - tiltErrorY;
+        
+        // Calculate the other kinematics values while we're at it
+        velocityX += a[0];
+        velocityY += a[1];
+        distanceX += velocityX;
+        distanceY += velocityY;
         return a;
+    }
+    
+    public double[] getVelocity() {
+        double[] v = {
+            velocityX,
+            velocityY
+        };
+        return v;
+    }
+    
+    public double[] getDistance() {
+        double[] d = {
+            distanceX,
+            distanceY
+        };
+        return d;
     }
     
     public void toggleDriveStraight()
@@ -232,5 +294,13 @@ public class Chassis extends PIDSubsystem {
         System.out.println(getGyroAngle());
         System.out.println(setPoint);
         driveState = 2;
+    }
+    
+    public double getSonarDistance()
+    {
+        double r = SmartDashboard.getNumber("Sonar Number", 4.0);
+        double d = (sonar.getValue() / r * 2 / 2.54);
+        distance = d;
+        return d;
     }
 }

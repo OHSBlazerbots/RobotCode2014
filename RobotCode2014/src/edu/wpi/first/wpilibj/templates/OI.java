@@ -64,27 +64,27 @@ public class OI {
     // until it is finished as determined by it's isFinished method.
     // stopBallFollowing.whenReleased(new ExampleCommand());
     public OI() {
-        stopBallFollowing = new JoystickButton(joystick, 4);
-        stopBallFollowing.whenPressed(new ToggleBallFollowing());
-        followBall = new JoystickButton(joystick, 1);
+        stopBallFollowing = new JoystickButton(joystick, 4); //y
+        stopBallFollowing.whenPressed(new ToggleBallFollowing()); 
+        followBall = new JoystickButton(joystick, 1); //a
         followBall.whenPressed(new CenterOnBall());
-        iRatio = new JoystickButton(joystick, 6);
+        iRatio = new JoystickButton(joystick, 6); //rb
         iRatio.whenPressed(new IncrementDriveRatio());
-        dRatio = new JoystickButton(joystick, 5);
+        dRatio = new JoystickButton(joystick, 5); //lb
         dRatio.whenPressed(new DecrementDriveRatio());
-        straightToggle = new JoystickButton(joystick, 2);
+        straightToggle = new JoystickButton(joystick, 2); //b
         straightToggle.whenPressed(new ToggleStraight());
-        turnToggle = new JoystickButton(joystick, 3);
+        turnToggle = new JoystickButton(joystick, 3); //x
         turnToggle.whenPressed(new ToggleTurn());
-        setSetpoint = new JoystickButton(joystick, 8);
+        setSetpoint = new JoystickButton(joystick, 8); //start
         setSetpoint.whenPressed(new SetSetpointCurrent());
-        toggleSetpoint = new JoystickButton(joystick, 7);
+        toggleSetpoint = new JoystickButton(joystick, 7); //back
         toggleSetpoint.whenPressed(new ToggleAutoTurn());
-        driveForward = new JoystickButton(joystick2, 1);
+        driveForward = new JoystickButton(joystick2, 1); //a
         driveForward.whenPressed(new DriveForward(2));
-        turn = new JoystickButton(joystick2, 2);
+        turn = new JoystickButton(joystick2, 2); //b
         turn.whenPressed(new Turn(85));
-        square = new JoystickButton(joystick2, 3);
+        square = new JoystickButton(joystick2, 3); //x
         square.whenPressed(new DriveInSquare());
     }
 

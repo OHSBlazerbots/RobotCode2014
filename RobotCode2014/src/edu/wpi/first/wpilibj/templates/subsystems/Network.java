@@ -7,6 +7,7 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
+import edu.wpi.first.wpilibj.templates.commands.GetDistance;
 import edu.wpi.first.wpilibj.templates.commands.GetNetworkData;
 
 /**
@@ -32,7 +33,7 @@ public class Network extends Subsystem{
     
     protected void initDefaultCommand() {
         // Starts the robot with the following non-terminating command
-        setDefaultCommand(new GetNetworkData());
+        //setDefaultCommand(new GetDistance());
     }
     
     /**
