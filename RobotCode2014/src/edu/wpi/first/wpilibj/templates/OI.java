@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.templates.commands.IncrementDriveRatio;
 import edu.wpi.first.wpilibj.templates.commands.SetSetpointCurrent;
 import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
 import edu.wpi.first.wpilibj.templates.commands.ToggleAutoTurn;
+import edu.wpi.first.wpilibj.templates.commands.TogglePickerUpDown;
 import edu.wpi.first.wpilibj.templates.commands.ToggleStraight;
 import edu.wpi.first.wpilibj.templates.commands.ToggleTurn;
 import edu.wpi.first.wpilibj.templates.commands.Turn;
@@ -34,7 +35,8 @@ public class OI {
             toggleSetpoint,
             driveForward,
             turn,
-            square;
+            square,
+            pickerUpDown;
 
     public OI() {
         //Instantiate all of the buttons
@@ -49,6 +51,7 @@ public class OI {
         driveForward = new JoystickButton(joystick2, 1);
         turn = new JoystickButton(joystick2, 2);
         square = new JoystickButton(joystick2, 3);
+        pickerUpDown = new JoystickButton(joystick2, 4);
 
         //Declare what the buttons do
         stopBallFollowing.whenPressed(new ToggleBallFollowing());
@@ -59,9 +62,10 @@ public class OI {
         turnToggle.whenPressed(new ToggleTurn());
         setSetpoint.whenPressed(new SetSetpointCurrent());
         toggleSetpoint.whenPressed(new ToggleAutoTurn());
-        driveForward.whenPressed(new DriveForward(2));
+        driveForward.whenPressed(new DriveForward(2, .4));
         turn.whenPressed(new Turn(85));
         square.whenPressed(new DriveInSquare());
+        pickerUpDown.whenPressed(new TogglePickerUpDown());
     }
 
     //Returns the joystick that controls driving

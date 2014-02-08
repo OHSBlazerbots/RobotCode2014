@@ -23,4 +23,12 @@ public class RobotMap {
     
     public static int JOYSTICK_PORT = 1;
     public static int JOYSTICK2_PORT = 2;
+    
+    public static int COMPRESSOR_SENSOR = 9;
+    
+    public static int COMPRESSOR = 3;
+    public static int PICKER = 1;
+    
+    public static int SOLENOID_FORWARD = 1;
+    public static int SOLENOID_BACK = 2;
 }

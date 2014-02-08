@@ -16,13 +16,14 @@ import edu.wpi.first.wpilibj.templates.commands.GoToSetPoint;
 import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.templates.commands.GetDistance;
 
 /**
  *
  * @author sgoldman
  */
-public class Chassis extends PIDSubsystem {
+public class Chassis extends Subsystem {
     //new RBDrive
 
     public static RobotDrive drive;
@@ -56,13 +57,6 @@ public class Chassis extends PIDSubsystem {
      * @param rearRightMotor
      */
     public Chassis(int frontLeftMotor, int frontRightMotor, int gyroPort) {
-        super("CHASSIS", 10.0, 5.0, 1.0);
-        setSetpoint(320);
-        setPercentTolerance(7);
-        getPIDController().setContinuous(false);
-        getPIDController().setInputRange(0, 360);
-        getPIDController().setOutputRange(-.75, .75);
-        getPIDController().disable();
         ratio = 1;
         velocityX = 0;
         velocityY = 0;

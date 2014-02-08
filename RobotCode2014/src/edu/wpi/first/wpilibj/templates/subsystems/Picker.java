@@ -18,41 +18,35 @@ public class Picker extends Subsystem {
     
     // Declare properties of the Picker
     Relay relay;
-    DoubleSolenoid solenoid1;
-    DoubleSolenoid solenoid2;
+    DoubleSolenoid solenoid;
+    //DoubleSolenoid solenoid2;
     Compressor compressing;
     
     // Constructor
-    public Picker(int relayChannel, int fwdSolenoidChannelOne, int revSolenoidChannelOne, int fwdSolenoidChannelTwo, int revSolenoidChannelTwo, int pressureSwitchControl, int compressorRelayChannel ) {
+    public Picker(int relayChannel, int fwdSolenoidChannel, int revSolenoidChannel, int pressureSwitchControl, int compressorRelayChannel ) {
         relay = new Relay(relayChannel);
-        solenoid1 = new DoubleSolenoid(fwdSolenoidChannelOne, revSolenoidChannelOne);
-        solenoid2 = new DoubleSolenoid(fwdSolenoidChannelTwo, revSolenoidChannelTwo);
+        solenoid = new DoubleSolenoid(fwdSolenoidChannel, revSolenoidChannel);
+        //solenoid2 = new DoubleSolenoid(fwdSolenoidChannelTwo, revSolenoidChannelTwo);
         compressing = new Compressor(pressureSwitchControl, compressorRelayChannel);
         compressing.start();
     }
     
     // Getter Methods
-    public Relay.Value getTurningState(){
-        return relay.get();
+    public boolean getTurningState(){
+        return (relay.get() == Relay.Value.kForward);
     }
     
-    public Value getExtendedLeftState(){
-        return solenoid1.get();
-    }
-    
-    public Value getExtendedRightState(){
-        return solenoid2.get();
+    public boolean getExtendedState(){
+        return (solenoid.get() == Value.kForward);
     }
     
     // Special Methods
     //Move the picker up or down
     public void pickerDown(){
-        solenoid1.set(DoubleSolenoid.Value.kForward);
-        solenoid2.set(DoubleSolenoid.Value.kForward);
+        solenoid.set(DoubleSolenoid.Value.kForward);
     }
     public void pickerUp(){
-        solenoid1.set(DoubleSolenoid.Value.kReverse);
-        solenoid2.set(DoubleSolenoid.Value.kReverse);
+        solenoid.set(DoubleSolenoid.Value.kReverse);
     }
     
     // Turn the wheels on or off

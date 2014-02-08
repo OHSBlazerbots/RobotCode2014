@@ -14,16 +14,17 @@ import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
  * @author blazerbots
  */
 public class DriveForward extends CommandBase{
-    private double time;
-    public DriveForward(double seconds) {
+    private double time, speed;
+    public DriveForward(double seconds, double spd) {
         requires(chassis);
         this.time = seconds;
+        speed = spd;
         System.out.println("DriveForward(" + seconds + ") created");
     }
 
     protected void initialize() {
         System.out.println("DriveForward.initialize(" + this.time + ",start)");
-        chassis.drive(0,-0.5);
+        chassis.drive(0, -speed);
         new Timer().delay(this.time);
         chassis.drive(0,0);
         System.out.println("DriveForward.initialize(" + this.time + ",end)");

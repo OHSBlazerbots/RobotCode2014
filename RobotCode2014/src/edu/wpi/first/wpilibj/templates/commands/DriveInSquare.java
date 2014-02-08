@@ -14,13 +14,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class DriveInSquare extends CommandGroup {
     
     public DriveInSquare() {
-        addSequential(new DriveForward(2));
+        addSequential(new DriveForward(2, .4));
         addSequential(new Turn(85));
-        addSequential(new DriveForward(2));
+        addSequential(new DriveForward(2 , .4));
         addSequential(new Turn(85));
-        addSequential(new DriveForward(2));
+        addSequential(new DriveForward(2, .4));
         addSequential(new Turn(85));
-        addSequential(new DriveForward(2));
+        addSequential(new DriveForward(2, .4));
         addSequential(new Turn(85));
     }
 }

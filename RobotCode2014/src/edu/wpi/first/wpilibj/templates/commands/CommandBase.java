@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.templates.OI;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 import edu.wpi.first.wpilibj.templates.subsystems.Network;
+import edu.wpi.first.wpilibj.templates.subsystems.Picker;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -18,6 +19,7 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.GYRO_PORT);
     public static Network network = new Network();
+    public static Picker picker = new Picker(RobotMap.PICKER, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

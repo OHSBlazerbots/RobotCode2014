@@ -42,15 +42,14 @@ public class RobotTemplate extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         autoCommand = new Autonomous();
-        autoCommand.execute();
-        
+        autoCommand.start();
     }
     
     /**
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-        //Scheduler.getInstance().run();
+        Scheduler.getInstance().run();
     }
 
     public void teleopInit() {
