@@ -32,7 +32,8 @@ public class OI {
             autoTarget,
             togglePickerUpDown,
             togglePickerWheels,
-            shootCycle;
+            shootCycle,
+            invertDrivingDirection;
 
     public OI() {
         //Driver
@@ -40,11 +41,13 @@ public class OI {
         speedUp = new JoystickButton(joystick, 3);
         slowDown = new JoystickButton(joystick, 1);
         autoTarget = new JoystickButton(joystick, 8);
+        invertDrivingDirection = new JoystickButton (joystick, 2);
         
         //What do the buttons do?
         speedUp.whenPressed(new DecrementDriveRatio());
         slowDown.whenPressed(new IncrementDriveRatio());
         autoTarget.whenPressed(new AutoTarget());
+        invertDrivingDirection.whenPressed(new InvertDrivingDirection());
         
         //Co Driver
         //Create buttons
