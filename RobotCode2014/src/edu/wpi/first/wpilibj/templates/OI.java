@@ -4,18 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.templates.commands.AutoTarget;
-import edu.wpi.first.wpilibj.templates.commands.CenterOnBall;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
-import edu.wpi.first.wpilibj.templates.commands.DriveForward;
-import edu.wpi.first.wpilibj.templates.commands.DriveInSquare;
 import edu.wpi.first.wpilibj.templates.commands.IncrementDriveRatio;
-import edu.wpi.first.wpilibj.templates.commands.SetSetpointCurrent;
-import edu.wpi.first.wpilibj.templates.commands.ToggleBallFollowing;
-import edu.wpi.first.wpilibj.templates.commands.ToggleAutoTurn;
+import edu.wpi.first.wpilibj.templates.commands.InvertDrivingDirection;
 import edu.wpi.first.wpilibj.templates.commands.TogglePickerUpDown;
-import edu.wpi.first.wpilibj.templates.commands.ToggleStraight;
-import edu.wpi.first.wpilibj.templates.commands.ToggleTurn;
-import edu.wpi.first.wpilibj.templates.commands.Turn;
 
 /**
  * This class is the glue that binds the controls on the physical operator

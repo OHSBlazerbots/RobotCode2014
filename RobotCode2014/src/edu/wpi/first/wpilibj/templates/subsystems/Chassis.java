@@ -187,8 +187,11 @@ public class Chassis extends Subsystem {
 
     //Shifts up the ratio by .5 if it is less than 2.5 currently
     public void incrementRatio() {
-        if (ratio < 2.5) {
+        if (0 < ratio && ratio < 2.5) {
             ratio += .5;
+        }
+        if (0 > ratio && ratio > -2.5) {
+            ratio -= .5;
         }
     }
 
@@ -196,6 +199,10 @@ public class Chassis extends Subsystem {
     public void decrementRatio() {
         if (ratio > 1) {
             ratio -= .5;
+        }
+        if (ratio < 1)
+        {
+            ratio += .5;
         }
     }
     
@@ -314,5 +321,10 @@ public class Chassis extends Subsystem {
         double d = (sonar.getValue() / r * 2 / 2.54);
         distance = d;
         return d;
+    }
+    
+    public void negatetRatio()
+    {
+        this.ratio *= -1;
     }
 }
