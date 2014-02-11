@@ -21,8 +21,8 @@ public class RobotMap {
     // public static final int rangefinderModule = 1;
     public static int GYRO_PORT = 1;
     
-    public static int JOYSTICK_PORT = 1;
-    public static int JOYSTICK2_PORT = 2;
+    public static int JOYSTICK_PORT = 2;
+    public static int JOYSTICK2_PORT = 1;
     
     public static int COMPRESSOR_SENSOR = 9;
     
