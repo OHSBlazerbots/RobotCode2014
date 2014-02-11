@@ -59,7 +59,7 @@ public class Shooter extends Subsystem {
         //Stop now, please
         stopShooter();
     }
-
+    //hi joey and sam
     //Stop the shooter
     public void stopShooter() {
         controller.set(0.0);
