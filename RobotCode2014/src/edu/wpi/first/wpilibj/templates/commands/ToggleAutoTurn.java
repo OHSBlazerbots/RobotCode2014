@@ -11,6 +11,8 @@ package edu.wpi.first.wpilibj.templates.commands;
  */
 public class ToggleAutoTurn extends CommandBase {
 
+    private GoToSetPoint goToSetPoint;
+
     public ToggleAutoTurn() {
         requires(chassis);
     }
@@ -22,7 +24,6 @@ public class ToggleAutoTurn extends CommandBase {
         } else {
             System.out.println("Turning to setpoint");
             chassis.goToSetPoint();
-            GoToSetPoint goToSetPoint;
             goToSetPoint = new GoToSetPoint();
             goToSetPoint.start();
         }
@@ -32,7 +33,7 @@ public class ToggleAutoTurn extends CommandBase {
     }
 
     protected boolean isFinished() {
-        return true;
+        return !goToSetPoint.isRunning();
     }
 
     protected void end() {

@@ -29,19 +29,19 @@ public class Chassis extends Subsystem {
     private static double ratio;
     private boolean driveStraight, onlyTurn;
     private Gyro gyro;
-   //private Accelerometer accelerometerX;
+    //private Accelerometer accelerometerX;
     //private Accelerometer accelerometerY;
     private ADXL345_I2C accel;
     private double setPoint,
             velocityX,
-            velocityY, 
+            velocityY,
             distanceX,
             distanceY,
             tiltErrorX,
             tiltErrorY,
             distance;
     private AnalogChannel sonar;
-    
+
     /**
      * Create an instance of the chassis class with the appropriate motors.
      *
@@ -62,7 +62,7 @@ public class Chassis extends Subsystem {
         drive = new RobotDrive(frontLeftMotor, frontRightMotor);
         //Disables safety so we can drive
         drive.setSafetyEnabled(false);
-        
+
         gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
         //accelerometerX = new Accelerometer(2);
         //accelerometerY = new Accelerometer(3);
@@ -92,19 +92,17 @@ public class Chassis extends Subsystem {
         move /= ratio;
         turn /= ratio;
         //Don't drive f/b if only turning is desired
-        if(onlyTurn)
-        {
+        if (onlyTurn) {
             move = 0;
         }
         //Don't turn if only f/b driving is desired
-        if(driveStraight)
-        {
+        if (driveStraight) {
             turn = 0;
         }
         //Put drive values on the smart dashboard
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
-        if (getSonarDistance() < 24.0 && move < 0)  // If less than 24 inches away, and moving forward
+        if (getSonarDistance() < 24.0 && move < 0) // If less than 24 inches away, and moving forward
         {
             //move = 0;
         }
@@ -114,18 +112,15 @@ public class Chassis extends Subsystem {
     public void drive(double move, double turn) {
         move /= ratio;
         turn /= ratio;
-        if(onlyTurn)
-        {
+        if (onlyTurn) {
             move = 0;
         }
-        if(driveStraight)
-        {
+        if (driveStraight) {
             turn = 0;
         }
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
-        if(getSonarDistance() < 24.0 && move < 0)
-        {
+        if (getSonarDistance() < 24.0 && move < 0) {
             move = 0;
         }
         drive.arcadeDrive(move, turn);
@@ -169,32 +164,28 @@ public class Chassis extends Subsystem {
         if (ratio > 1) {
             ratio -= .5;
         }
-        if (ratio < 1)
-        {
+        if (ratio < 1) {
             ratio += .5;
         }
     }
-    
+
     //Converts the raw gyro angle to degrees and returns it
-    public double getGyroAngle()
-    {
+    public double getGyroAngle() {
         double angle = gyro.getAngle() % (360);
-        if (angle < 0.0)
-        {
+        if (angle < 0.0) {
             angle += 360;
         }
         return angle;
     }
-    
+
     //Returns a double array
     //First number is x
     //Second number is y
-    public double[] getAcceleration()
-    {
+    public double[] getAcceleration() {
         double[] a = new double[2];
-        a[0] = accel.getAcceleration(ADXL345_I2C.Axes.kX)  - tiltErrorX;
-        a[1] = accel.getAcceleration(ADXL345_I2C.Axes.kY)  - tiltErrorY;
-        
+        a[0] = accel.getAcceleration(ADXL345_I2C.Axes.kX) - tiltErrorX;
+        a[1] = accel.getAcceleration(ADXL345_I2C.Axes.kY) - tiltErrorY;
+
         // Calculate the other kinematics values while we're at it
         velocityX += a[0];
         velocityY += a[1];
@@ -202,7 +193,7 @@ public class Chassis extends Subsystem {
         distanceY += velocityY;
         return a;
     }
-    
+
     public double[] getVelocity() {
         double[] v = {
             velocityX,
@@ -210,7 +201,7 @@ public class Chassis extends Subsystem {
         };
         return v;
     }
-    
+
     public double[] getDistance() {
         double[] d = {
             distanceX,
@@ -218,87 +209,76 @@ public class Chassis extends Subsystem {
         };
         return d;
     }
-    
+
     //Turns on and off just driving straight
-    public void toggleDriveStraight()
-    {
+    public void toggleDriveStraight() {
         driveStraight = !driveStraight;
     }
-    
+
     //Turns on and off just turning
-    public void toggleOnlyTurn()
-    {
+    public void toggleOnlyTurn() {
         onlyTurn = !onlyTurn;
     }
-    
+
     //Sets the target angle to the current angle
-    public void setGyroSetpoint()
-    {
+    public void setGyroSetpoint() {
         setPoint = getGyroAngle();
         System.out.println(setPoint);
-        
+
     }
-    
+
     //Enables going to the target angle (setpoint)
-    public void goToSetPoint()
-    {
+    public void goToSetPoint() {
         driveState = 2;
     }
-    
+
     //Return the sign of the number, or 0 if it is 0
-    public int sign(double value)
-    {
-        if(value == 0)
-        {
+    public int sign(double value) {
+        if (value == 0) {
             //If it is 0, there is no sign
             return 0;
-        }
-        else if(value > 0){
+        } else if (value > 0) {
             //If it is greater than 0, it is positive
             return 1;
-        }
-        else{
+        } else {
             //If it is not 0 or greater than zero, it is less than 0 and thus negative
             return -1;
         }
     }
-    
+
     //Halts the going to target angle
-    public void stopGoingToSetPoint()
-    {
+    public void stopGoingToSetPoint() {
         driveState = 0;
     }
-    
+
     //Returns the target angle
-    public double getSetPoint()
-    {
+    public double getSetPoint() {
         return setPoint;
     }
-    
+
     //Set the target angle to d degrees farther than it currently is
-    public void turn(double d)
-    {
+    public void turn(double d) {
         setPoint = (getGyroAngle() + d) % 360;
         System.out.println(getGyroAngle());
         System.out.println(setPoint);
         driveState = 2;
     }
-    
-    public double getSonarDistance()
-    {
+
+    public double getSonarDistance() {
         double r = SmartDashboard.getNumber("Sonar Number", 4.0);
         double d = (sonar.getValue() / r * 2 / 2.54);
-        distance = d;
-        return d;
+        if (d > 150) {
+        } else {
+            distance = d;
+        }
+        return distance;
     }
-    
-    public void negatetRatio()
-    {
+
+    public void negatetRatio() {
         this.ratio *= -1;
     }
-    
-    public void setSetPoint(double degrees)
-    {
+
+    public void setSetPoint(double degrees) {
         this.setPoint = degrees;
     }
 }

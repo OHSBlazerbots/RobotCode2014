@@ -4,11 +4,7 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitUntilCommand;
-import edu.wpi.first.wpilibj.command.PrintCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 
 /**
@@ -27,16 +23,17 @@ public class AutoTarget extends CommandBase {
         done = false;
         //Turn to 0
         chassis.setSetPoint(0);
-        ToggleAutoTurn toggleAutoTurn = new ToggleAutoTurn();
-        toggleAutoTurn.start();
+//        ToggleAutoTurn toggleAutoTurn = new ToggleAutoTurn();
+//        toggleAutoTurn.start();
     }
 
     protected void execute() {
         double distance = chassis.getSonarDistance();
-        if (distance > 125) {
-            Chassis.drive.arcadeDrive(0, .4);
-        } else if (distance < 115) {
-            Chassis.drive.arcadeDrive(0, -.4);
+        SmartDashboard.putNumber("Sonar", distance);
+        if (distance > 102) {
+            Chassis.drive.arcadeDrive(0, -.5);
+        } else if (distance < 98) {
+            Chassis.drive.arcadeDrive(0, .5);
         } else {
             done = true;
         }
