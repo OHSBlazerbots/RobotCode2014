@@ -9,25 +9,47 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj.command.PrintCommand;
+import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 
 /**
  *
  * @author jmuller4
  */
-public class AutoTarget extends CommandGroup {
+public class AutoTarget extends CommandBase {
+
+    private boolean done;
 
     public AutoTarget() {
-        //Is the target hot?
-        boolean hot = CommandBase.network.getNetworkVariable("BLOB_COUNT") > 0;
-        //Drive forward  1 second = 4 feet
-        addSequential(new DriveForward(1.75, .75));
-        //Go back to 0 degrees
-        addSequential(new ToggleAutoTurn());
-        if(!hot)
-        {
-            addSequential(new WaitUntilCommand(6));
+        requires(chassis);
+    }
+
+    protected void initialize() {
+        done = false;
+        //Turn to 0
+        chassis.setSetPoint(0);
+        ToggleAutoTurn toggleAutoTurn = new ToggleAutoTurn();
+        toggleAutoTurn.start();
+    }
+
+    protected void execute() {
+        double distance = chassis.getSonarDistance();
+        if (distance > 125) {
+            Chassis.drive.arcadeDrive(0, .4);
+        } else if (distance < 115) {
+            Chassis.drive.arcadeDrive(0, -.4);
+        } else {
+            done = true;
         }
-        //addSequential(new Turn(90));
-        addSequential(new PrintCommand("Shoot!"));
+    }
+
+    protected boolean isFinished() {
+        return done;
+    }
+
+    protected void end() {
+        Chassis.drive.arcadeDrive(0, 0);
+    }
+
+    protected void interrupted() {
     }
 }

@@ -4,20 +4,14 @@
  */
 package edu.wpi.first.wpilibj.templates.subsystems;
 
-import edu.wpi.first.wpilibj.Accelerometer;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.DriveWithJoystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.templates.commands.GoToSetPoint;
-import edu.wpi.first.wpilibj.templates.commands.PutGyroAccelData;
 import edu.wpi.first.wpilibj.ADXL345_I2C;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.templates.commands.GetDistance;
 
 /**
  *
@@ -144,31 +138,6 @@ public class Chassis extends Subsystem {
         //Starts driving the robot with this non terminating command
         setDefaultCommand(new DriveWithJoystick());
     }
-
-    //<editor-fold defaultstate="collapsed" desc="PID Stuff - not used">
-    protected double returnPIDInput() {
-        return gyro.pidGet();
-    }
-    
-    protected void usePIDOutput(double d) {
-//        if (getPIDController().isEnable()) {
-//            double a = CommandBase.network.getNetworkVariable("COG_AREA");
-//            double dv;
-//            if (CommandBase.network.getNetworkVariable("CIRCLES_COUNT") > 0 && a / (480 * 640) < .9) {
-//                dv = -1;
-//            } else {
-//                dv = 0;
-//            }
-//            if (!onTarget()) {
-//                drive.arcadeDrive(d, dv);
-//            } else {
-//                drive.arcadeDrive(0, dv);
-//            }
-//        } else {
-//            drive.arcadeDrive(0, 0);
-//        }
-    }
-    //</editor-fold>
 
     //Returns the current method of driving the robot
     public int getState() {
@@ -326,5 +295,10 @@ public class Chassis extends Subsystem {
     public void negatetRatio()
     {
         this.ratio *= -1;
+    }
+    
+    public void setSetPoint(double degrees)
+    {
+        this.setPoint = degrees;
     }
 }
