@@ -100,6 +100,7 @@ public class Chassis extends Subsystem {
             turn = 0;
         }
         //Put drive values on the smart dashboard
+        SmartDashboard.putBoolean("Backwards Driving", ratio > 0);
         SmartDashboard.putNumber("Turn Value", turn);
         SmartDashboard.putNumber("Move Value", move);
         if (getSonarDistance() < 24.0 && move < 0) // If less than 24 inches away, and moving forward
