@@ -8,27 +8,29 @@ package edu.wpi.first.wpilibj.templates;
  */
 public class RobotMap {
     
-    // For example to map the left and right motors, you could define the
-    // following variables to use with your drivetrain subsystem.
+    //PWM
     public static final int FRONT_LEFT_MOTOR = 1;
-    public static final int REAR_LEFT_MOTOR = 2;
+    public static final int REAR_LEFT_MOTOR = 3;
     public static final int FRONT_RIGHT_MOTOR = 2;
     public static final int REAR_RIGHT_MOTOR = 4;
+    public static final int SHOOTER_PICKUP = 5;
     
-    // If you are using multiple modules, make sure to define both the port
-    // number and the module. For example you with a rangefinder:
-    // public static final int rangefinderPort = 1;
-    // public static final int rangefinderModule = 1;
-    public static int GYRO_PORT = 1;
+    //Analog
+    public static final int GYRO_PORT = 1;
+    public static final int SONAR_PORT = 7;
     
-    public static int JOYSTICK_PORT = 2;
-    public static int JOYSTICK2_PORT = 1;
+    //Joysticks
+    public static final int JOYSTICK_PORT = 2;
+    public static final int JOYSTICK2_PORT = 1;
     
-    public static int COMPRESSOR_SENSOR = 9;
+    //O/I
+    public static final int COMPRESSOR_SENSOR = 9;
     
-    public static int COMPRESSOR = 3;
-    public static int PICKER = 1;
+    //Relays
+    public static final int COMPRESSOR = 3;
+    public static final int PICKER_SPIKE = 1;
     
-    public static int SOLENOID_FORWARD = 1;
-    public static int SOLENOID_BACK = 2;
+    //Pneumatics
+    public static final int SOLENOID_FORWARD = 1;
+    public static final int SOLENOID_BACK = 2;
 }

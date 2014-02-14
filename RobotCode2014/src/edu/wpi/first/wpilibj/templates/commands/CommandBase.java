@@ -17,9 +17,9 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     // Create a single static instance of all of your subsystems
-    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.GYRO_PORT);
+    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.REAR_LEFT_MOTOR, RobotMap.REAR_RIGHT_MOTOR, RobotMap.GYRO_PORT, RobotMap.SONAR_PORT);
     public static Network network = new Network();
-    public static Picker picker = new Picker(RobotMap.PICKER, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
+    public static Picker picker = new Picker(RobotMap.PICKER_SPIKE, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

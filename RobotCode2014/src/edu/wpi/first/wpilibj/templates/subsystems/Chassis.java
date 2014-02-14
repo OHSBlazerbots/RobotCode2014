@@ -44,13 +44,13 @@ public class Chassis extends Subsystem {
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
-     *
+     *motors
      * @param frontLeftMotor
      * @param rearLeftMotor
      * @param frontRightMotor
      * @param rearRightMotor
      */
-    public Chassis(int frontLeftMotor, int frontRightMotor, int gyroPort) {
+    public Chassis(int frontLeftMotor, int frontRightMotor, int rearLeftMotor, int rearRightMotor, int gyroPort, int sonarPort) {
         ratio = 1;
         velocityX = 0;
         velocityY = 0;
@@ -59,11 +59,10 @@ public class Chassis extends Subsystem {
         driveStraight = false;
         onlyTurn = false;
         //Create new robot drive class with pin values for the two motors
-        drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+        drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
         //Disables safety so we can drive
         drive.setSafetyEnabled(false);
-
-        gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
+        gyro = new Gyro(gyroPort);
         //accelerometerX = new Accelerometer(2);
         //accelerometerY = new Accelerometer(3);
         gyro.startLiveWindowMode();
@@ -75,7 +74,7 @@ public class Chassis extends Subsystem {
         this.driveState = 0;
         setPoint = 0.0;
         distance = 0.0;
-        sonar = new AnalogChannel(7);
+        sonar = new AnalogChannel(sonarPort);
     }
 
     /**
