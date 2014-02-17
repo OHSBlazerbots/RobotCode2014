@@ -1,13 +1,23 @@
 package edu.wpi.first.wpilibj.templates;
 
+import com.sun.squawk.io.BufferedReader;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.templates.commands.AutoTarget;
+import edu.wpi.first.wpilibj.templates.commands.CycleShooter;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
 import edu.wpi.first.wpilibj.templates.commands.IncrementDriveRatio;
 import edu.wpi.first.wpilibj.templates.commands.InvertDrivingDirection;
+import edu.wpi.first.wpilibj.templates.commands.Latch;
+import edu.wpi.first.wpilibj.templates.commands.Pullback;
+import edu.wpi.first.wpilibj.templates.commands.ReleaseShooter;
+import edu.wpi.first.wpilibj.templates.commands.Shoot;
+import edu.wpi.first.wpilibj.templates.commands.StopPullAndLatch;
+import edu.wpi.first.wpilibj.templates.commands.StopRelease;
+import edu.wpi.first.wpilibj.templates.commands.TogglePickerRun;
 import edu.wpi.first.wpilibj.templates.commands.TogglePickerUpDown;
+import java.io.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -25,9 +35,12 @@ public class OI {
             togglePickerUpDown,
             togglePickerWheels,
             shootCycle,
+            releaseShooter,
+            shoot,
             invertDrivingDirection;
 
     public OI() {
+        
         //Driver
         //Create buttons
         speedUp = new JoystickButton(joystick, 3);
@@ -46,11 +59,17 @@ public class OI {
         togglePickerUpDown = new JoystickButton(joystick2, 3);
         togglePickerWheels = new JoystickButton(joystick2, 1);
         shootCycle = new JoystickButton(joystick2, 4);
+        releaseShooter = new JoystickButton(joystick2, 2);
+        shoot = new JoystickButton(joystick2, 8);
         
         //What do the buttons do?
         togglePickerUpDown.whenPressed(new TogglePickerUpDown());
-        togglePickerWheels.whenPressed(new PrintCommand("Toggle Wheels"));
-        shootCycle.whenPressed(new PrintCommand("Shoot Cycle"));
+        togglePickerWheels.whenPressed(new TogglePickerRun());
+        shootCycle.whenPressed(new Pullback());
+        shootCycle.whenReleased(new StopPullAndLatch());
+        releaseShooter.whenPressed(new ReleaseShooter());
+        releaseShooter.whenReleased(new StopRelease());
+        shoot.whenPressed(new Shoot());
     }
 
     //Returns the joystick that controls driving

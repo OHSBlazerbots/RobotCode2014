@@ -24,7 +24,7 @@ public class DriveForward extends CommandBase{
 
     protected void initialize() {
         System.out.println("DriveForward.initialize(" + this.time + ",start)");
-        chassis.drive(0, -speed);
+        chassis.drive(-speed, 0);
         new Timer().delay(this.time);
         chassis.drive(0,0);
         System.out.println("DriveForward.initialize(" + this.time + ",end)");

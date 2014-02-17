@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 import edu.wpi.first.wpilibj.templates.subsystems.Network;
 import edu.wpi.first.wpilibj.templates.subsystems.Picker;
+import edu.wpi.first.wpilibj.templates.subsystems.Shooter;
+import com.sun.squawk.ResourceFile;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -17,9 +19,10 @@ public abstract class CommandBase extends Command {
 
     public static OI oi;
     // Create a single static instance of all of your subsystems
-    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.GYRO_PORT);
+    public static Chassis chassis = new Chassis(RobotMap.FRONT_LEFT_MOTOR, RobotMap.FRONT_RIGHT_MOTOR, RobotMap.REAR_LEFT_MOTOR, RobotMap.REAR_RIGHT_MOTOR, RobotMap.GYRO_PORT, RobotMap.SONAR_PORT);
     public static Network network = new Network();
-    public static Picker picker = new Picker(RobotMap.PICKER, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
+    public static Picker picker = new Picker(RobotMap.PICKER_SPIKE, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.SOLENOID2_FORWARD, RobotMap.SOLENOID2_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
+    public static Shooter shooter = new Shooter(RobotMap.SHOOTER_PICKUP, RobotMap.SERVO_PORT);
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

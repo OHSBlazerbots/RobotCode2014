@@ -50,7 +50,7 @@ public class Chassis extends Subsystem {
      * @param frontRightMotor
      * @param rearRightMotor
      */
-    public Chassis(int frontLeftMotor, int frontRightMotor, int gyroPort) {
+    public Chassis(int frontLeftMotor, int frontRightMotor, int rearLeftMotor, int rearRightMotor, int gyroPort, int sonarPort) {
         ratio = 1;
         velocityX = 0;
         velocityY = 0;
@@ -59,14 +59,14 @@ public class Chassis extends Subsystem {
         driveStraight = false;
         onlyTurn = false;
         //Create new robot drive class with pin values for the two motors
-        drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+        drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
         //Disables safety so we can drive
         drive.setSafetyEnabled(false);
 
-        gyro = new Gyro(1, 1)/*(RobotMap.GYRO_PORT, 2);*/;
+        //gyro = new Gyro(gyroPort)/*(RobotMap.GYRO_PORT, 2);*/;
         //accelerometerX = new Accelerometer(2);
         //accelerometerY = new Accelerometer(3);
-        gyro.startLiveWindowMode();
+        //gyro.startLiveWindowMode();
         //accelerometerX.startLiveWindowMode();
         //accelerometerY.startLiveWindowMode();
         accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
@@ -75,7 +75,7 @@ public class Chassis extends Subsystem {
         this.driveState = 0;
         setPoint = 0.0;
         distance = 0.0;
-        sonar = new AnalogChannel(7);
+        sonar = new AnalogChannel(sonarPort);
     }
 
     /**
@@ -107,23 +107,23 @@ public class Chassis extends Subsystem {
         {
             //move = 0;
         }
-        drive.arcadeDrive(turn, move);
+        drive.arcadeDrive(move, turn);
     }
 
     public void drive(double move, double turn) {
-        move /= ratio;
-        turn /= ratio;
-        if (onlyTurn) {
-            move = 0;
-        }
-        if (driveStraight) {
-            turn = 0;
-        }
-        SmartDashboard.putNumber("Turn Value", turn);
-        SmartDashboard.putNumber("Move Value", move);
-        if (getSonarDistance() < 24.0 && move < 0) {
-            move = 0;
-        }
+//        move /= ratio;
+//        turn /= ratio;
+//        if (onlyTurn) {
+//            move = 0;
+//        }
+//        if (driveStraight) {
+//            turn = 0;
+//        }
+//        SmartDashboard.putNumber("Turn Value", turn);
+//        SmartDashboard.putNumber("Move Value", move);
+//        if (getSonarDistance() < 24.0 && move < 0) {
+//            move = 0;
+//        }
         drive.arcadeDrive(move, turn);
     }
 

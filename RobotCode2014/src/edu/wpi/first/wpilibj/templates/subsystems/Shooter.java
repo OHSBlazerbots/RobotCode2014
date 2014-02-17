@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Timer;
@@ -19,9 +20,11 @@ public class Shooter extends Subsystem {
     private double shooterSpeed;
     //The speed controller
     private SpeedController controller;
+    private Servo servo;
 
-    public Shooter(int channel) {
+    public Shooter(int channel, int servoChannel) {
         controller = new Jaguar(channel);
+        servo = new Servo(servoChannel);
     }
 
     public void initDefaultCommand() {
@@ -47,8 +50,7 @@ public class Shooter extends Subsystem {
         if (speed > 1.0) {
             speed = 1.0;
         }
-        if (speed
-                < -1.0) {
+        if (speed < -1.0) {
             speed = -1.0;
         }
         //Set the speed
@@ -69,5 +71,15 @@ public class Shooter extends Subsystem {
     public double getCurrentSpeed()
     {
         return shooterSpeed;
+    }
+    
+    public void setServoAngle(double d)
+    {
+        servo.setAngle(d);
+    }
+    
+    public double getServoAngle()
+    {
+        return servo.getAngle();
     }
 }
