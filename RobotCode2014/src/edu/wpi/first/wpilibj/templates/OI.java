@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.templates.commands.AutoTarget;
+import edu.wpi.first.wpilibj.templates.commands.AutomaticTesting;
 import edu.wpi.first.wpilibj.templates.commands.CycleShooter;
 import edu.wpi.first.wpilibj.templates.commands.DecrementDriveRatio;
 import edu.wpi.first.wpilibj.templates.commands.IncrementDriveRatio;
@@ -37,7 +38,8 @@ public class OI {
             shootCycle,
             releaseShooter,
             shoot,
-            invertDrivingDirection;
+            invertDrivingDirection,
+            testButton;
 
     public OI() {
         
@@ -47,12 +49,14 @@ public class OI {
         slowDown = new JoystickButton(joystick, 1);
         autoTarget = new JoystickButton(joystick, 8);
         invertDrivingDirection = new JoystickButton (joystick, 2);
+        testButton = new JoystickButton(joystick, 10);
         
         //What do the buttons do?
         speedUp.whenPressed(new DecrementDriveRatio());
         slowDown.whenPressed(new IncrementDriveRatio());
         autoTarget.whenPressed(new AutoTarget());
         invertDrivingDirection.whenPressed(new InvertDrivingDirection());
+        testButton.whenPressed(new AutomaticTesting());
         
         //Co Driver
         //Create buttons
