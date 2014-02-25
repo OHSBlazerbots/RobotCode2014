@@ -19,14 +19,14 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class Picker extends Subsystem {
     
     // Declare properties of the Picker
-    SpeedController controller;
+    Relay relay;
     DoubleSolenoid solenoid, solenoid2;
     //DoubleSolenoid solenoid2;
     Compressor compressing;
     
     // Constructor
     public Picker(int cChannel, int fwdSolenoidChannel, int revSolenoidChannel, int fwdSolenoidChannel2, int revSolenoidChannel2, int pressureSwitchControl, int compressorRelayChannel ) {
-        controller = new Jaguar(cChannel);
+        relay = new Relay(cChannel);
         solenoid = new DoubleSolenoid(fwdSolenoidChannel, revSolenoidChannel);
         solenoid2 = new DoubleSolenoid(fwdSolenoidChannel2, revSolenoidChannel2);
         //solenoid2 = new DoubleSolenoid(fwdSolenoidChannelTwo, revSolenoidChannelTwo);
@@ -36,7 +36,7 @@ public class Picker extends Subsystem {
     
     // Getter Methods
     public boolean getTurningState(){
-        return (controller.get() > 0);
+        return (relay.get() == Relay.Value.kForward);
     }
     
     public boolean getExtendedState(){
@@ -56,10 +56,10 @@ public class Picker extends Subsystem {
     
     // Turn the wheels on or off
     public void turnOn(){
-        controller.set(1.0);
+        relay.set(Relay.Value.kForward);
     }
     public void turnOff(){
-        controller.set(0.0);
+        relay.set(Relay.Value.kOff);
     }
 
     public void initDefaultCommand() {

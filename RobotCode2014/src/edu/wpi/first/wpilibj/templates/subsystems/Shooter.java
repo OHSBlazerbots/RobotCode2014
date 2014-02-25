@@ -5,6 +5,7 @@
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -19,11 +20,11 @@ public class Shooter extends Subsystem {
     // Tells us the current speed of the shooter
     private double shooterSpeed;
     //The speed controller
-    private SpeedController controller;
-    private Servo servo;
+    private final Relay relay;
+    private final Servo servo;
 
     public Shooter(int channel, int servoChannel) {
-        controller = new Jaguar(channel);
+        relay = new Relay(channel);
         servo = new Servo(servoChannel);
     }
 
@@ -34,27 +35,24 @@ public class Shooter extends Subsystem {
 
     public void runShooter(double speed) {
         // Limit the speed of the motor - we dont want to die
-        if (speed > 1.0) {
-            speed = 1.0;
+        if (speed > 0) {
+            relay.set(Relay.Value.kForward);
         }
-        if (speed < -1.0) {
-            speed = -1.0;
+        if (speed < 0) {
+            relay.set(Relay.Value.kReverse);
         }
-        //Set the speed
-        controller.set(speed);
         shooterSpeed = speed;
     }
 
     public void runShooter(double speed, double seconds) {
         // Limit the speed of the motor - we dont want to die
-        if (speed > 1.0) {
-            speed = 1.0;
+        if (speed > 0) {
+            relay.set(Relay.Value.kForward);
         }
-        if (speed < -1.0) {
-            speed = -1.0;
+        if (speed < 0) {
+            relay.set(Relay.Value.kReverse);
         }
         //Set the speed
-        controller.set(speed);
         shooterSpeed = speed;
         //Let it run for seconds
         Timer.delay(seconds);
@@ -64,7 +62,7 @@ public class Shooter extends Subsystem {
     //hi joey and sam
     //Stop the shooter
     public void stopShooter() {
-        controller.set(0.0);
+        relay.set(Relay.Value.kOff);
         shooterSpeed = 0;
     }
     

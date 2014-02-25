@@ -14,8 +14,8 @@ public class RobotMap {
     public static final int FRONT_RIGHT_MOTOR = 2;
     public static final int REAR_RIGHT_MOTOR = 4;
     public static final int SHOOTER_PICKUP = 5;
-    public static final int SERVO_PORT = 7;
-    public static final int PICKER_SPIKE = 6;
+    public static final int SERVO_PORT = 6;
+    
 
     // Analog
     public static final int GYRO_PORT = 1;
@@ -30,6 +30,8 @@ public class RobotMap {
 
     //Relays
     public static final int COMPRESSOR = 2;
+    public static final int PICKER_SPIKE = 1;
+    public static final int SHOOTER_SPIKE = 4;
 
     //Pneumatics
     public static final int SOLENOID_FORWARD = 1;

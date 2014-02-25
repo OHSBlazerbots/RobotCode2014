@@ -17,6 +17,7 @@ public class Pullback extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        shooter.setServoAngle(110);
         shooter.runShooter(.5);
     }
 
