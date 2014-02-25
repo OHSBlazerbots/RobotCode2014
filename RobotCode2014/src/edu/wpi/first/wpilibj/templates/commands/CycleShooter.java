@@ -6,6 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -19,11 +20,20 @@ public class CycleShooter extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        double pullback = SmartDashboard.getNumber("PullbackConfig", 6.0);
+        double unwind = SmartDashboard.getNumber("UnwindConfig", 6.0);
+        double pullbackSpeed = SmartDashboard.getNumber("PullbackSpeed", .5);
+        double unwindSpeed = SmartDashboard.getNumber("UnwindSpeed", .5);
+        //Fire
         shooter.setServoAngle(110);
+        //Wait
         Timer.delay(1);
-        shooter.runShooter(.5, 4);
+        //Pullback
+        shooter.runShooter(pullbackSpeed, pullback);
+        //Latch
         shooter.setServoAngle(15);
-        shooter.runShooter(-.5, 4);
+        //Unwind
+        shooter.runShooter(-unwindSpeed, unwind);
     }
 
     // Called repeatedly when this Command is scheduled to run

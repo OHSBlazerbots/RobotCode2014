@@ -65,11 +65,13 @@ public class OI {
         //What do the buttons do?
         togglePickerUpDown.whenPressed(new TogglePickerUpDown());
         togglePickerWheels.whenPressed(new TogglePickerRun());
-        shootCycle.whenPressed(new Pullback());
-        shootCycle.whenReleased(new StopPullAndLatch());
-        releaseShooter.whenPressed(new ReleaseShooter());
-        releaseShooter.whenReleased(new StopRelease());
-        shoot.whenPressed(new Shoot());
+        shootCycle.whenPressed(new CycleShooter());
+//Manual pullback/shoot
+//        shootCycle.whenPressed(new Pullback());
+//        shootCycle.whenReleased(new StopPullAndLatch());
+//        releaseShooter.whenPressed(new ReleaseShooter());
+//        releaseShooter.whenReleased(new StopRelease());
+//        shoot.whenPressed(new Shoot());
     }
 
     //Returns the joystick that controls driving
