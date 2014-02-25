@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * @author blazerbots
  */
-public class CycleShooter extends CommandBase {
+public class TestCycleShooter extends CommandBase {
     
-    public CycleShooter() {
+    public TestCycleShooter() {
         requires(shooter);
     }
 
@@ -27,11 +27,13 @@ public class CycleShooter extends CommandBase {
         //Fire
         shooter.setServoAngle(110);
         //Wait
-        Timer.delay(1);
+        Timer.delay(5);
         //Pullback
         shooter.runShooter(pullbackSpeed, pullback);
+        Timer.delay(4);
         //Latch
         shooter.setServoAngle(15);
+        Timer.delay(5);
         //Unwind
         shooter.runShooter(-unwindSpeed, unwind);
     }
