@@ -41,6 +41,7 @@ public class AutomaticTesting extends CommandGroup {
         addSequential(new TurnLeft(3.0, 1.0));
         addSequential(new WaitCommand(1));
         
+        /* Commented out for testing on old bot - replace for new bot
         //Wait to check pressure at 120 psi
         addSequential(new WaitCommand(10));
         
@@ -62,5 +63,6 @@ public class AutomaticTesting extends CommandGroup {
     
         //Shooting shooter
         addSequential(new TestCycleShooter());
+        * */
     }
 }
