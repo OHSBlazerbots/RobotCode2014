@@ -61,6 +61,6 @@ public class AutomaticTesting extends CommandGroup {
         addSequential(new WaitCommand(5));
     
         //Shooting shooter
-        
+        addSequential(new TestCycleShooter());
     }
 }
