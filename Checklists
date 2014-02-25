@@ -1,0 +1,36 @@
+Semi-Automated Robot Testing Setup
+Check off:
+	Robot is off
+	Robot is on the cart, wheels are not touching cart and all wires are away from moving parts
+	Ethernet cord is hooked up to the cRIO and the computer
+	Driver station software is running
+	Smart dashboard software is running
+	Catapult is pulled back and latched
+	Catapult pullback belt is unwound
+	Picker is in the down position
+	Turn robot on
+	Ensure that the three indicators on the driver station software are green
+	Enable the robot
+	Get out the system checklist (should be attached to this)
+	On the driver’s controller, press the lower analog joystick down
+	The robot will now go through the checklist in order. Check things off as they happen
+
+
+Match: _________		Time:________	Result:________
+System Checklist
+The robot will run through each subsystem listed. Check off these off as they happen.
+	The compressor starts up (0 – 5 seconds)
+	The robot drives forward at various speeds (5 – 15 seconds)
+	The robot drives backward at various speeds (15 – 25 seconds)
+	The robot drives left at various speeds (25 – 35 seconds)
+	The robot drives right at various speeds (35 – 45 seconds)
+	Pressure is at 120 psi (45 – 55 seconds)
+	The picker is pulled up (55 – 60 seconds)
+	The picker is pushed down (60 – 65 seconds)
+	The picker wheels startup (65 – 70 seconds)
+	The picker wheels stop (70 – 75 seconds)
+	The shooter shoots (75 – 80 seconds)
+	The shooter pulls back (80 – 90 seconds)
+	The shooter latches (90 – 95 seconds)
+	The shooter unwinds (95 – 105 seconds)
+Tester’s Name: __________________		Singnature:____________________
