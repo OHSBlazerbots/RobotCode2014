@@ -19,10 +19,11 @@ public class Shooter extends Subsystem {
 
     // Tells us the current speed of the shooter
     private double shooterSpeed;
-    //The speed controller
+    //The spike
     private final Relay relay;
     private final Servo servo;
 
+    //Contruct
     public Shooter(int channel, int servoChannel) {
         relay = new Relay(channel);
         servo = new Servo(servoChannel);
@@ -33,8 +34,8 @@ public class Shooter extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
 
+    //Run the pullback mechanism
     public void runShooter(double speed) {
-        // Limit the speed of the motor - we dont want to die
         if (speed > 0) {
             relay.set(Relay.Value.kForward);
         }
@@ -44,6 +45,7 @@ public class Shooter extends Subsystem {
         shooterSpeed = speed;
     }
 
+    //Run the pullback mechanism for a specified amount of time
     public void runShooter(double speed, double seconds) {
         // Limit the speed of the motor - we dont want to die
         if (speed > 0) {
@@ -59,23 +61,26 @@ public class Shooter extends Subsystem {
         //Stop now, please
         stopShooter();
     }
-    //hi joey and sam
+
     //Stop the shooter
     public void stopShooter() {
         relay.set(Relay.Value.kOff);
         shooterSpeed = 0;
     }
     
+    //Get speed
     public double getCurrentSpeed()
     {
         return shooterSpeed;
     }
     
+    //Set servo angle
     public void setServoAngle(double d)
     {
         servo.setAngle(d);
     }
     
+    //Get servo angle
     public double getServoAngle()
     {
         return servo.getAngle();
