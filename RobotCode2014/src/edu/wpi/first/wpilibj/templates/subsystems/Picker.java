@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.SpeedController;
 
 /**
- *
+ * Deals with picker assets
  * @author jmuller4
  */
 public class Picker extends Subsystem {

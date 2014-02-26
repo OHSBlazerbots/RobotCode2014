@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Unwind the the pullback cord.
  * @author blazerbots
  */
 public class ReleaseShooter extends CommandBase {

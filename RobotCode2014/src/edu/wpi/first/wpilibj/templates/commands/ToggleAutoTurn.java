@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Turn on/off the automated turning function.
  * @author blazerbots
  */
 public class ToggleAutoTurn extends CommandBase {

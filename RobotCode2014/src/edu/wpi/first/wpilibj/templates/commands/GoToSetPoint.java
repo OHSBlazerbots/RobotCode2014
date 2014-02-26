@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 
 /**
- *
+ * Use the gyro to position the robot at a certain angle.
  * @author blazerbots
  */
 public class GoToSetPoint extends CommandBase {

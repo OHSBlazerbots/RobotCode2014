@@ -7,11 +7,9 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
-import edu.wpi.first.wpilibj.templates.commands.GetDistance;
-import edu.wpi.first.wpilibj.templates.commands.GetNetworkData;
 
 /**
- *
+ * Deals with network assets.
  * @author sgoldman
  */
 public class Network extends Subsystem{

@@ -6,7 +6,8 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Increase the drive ratio.
+ * This actually slows the robot down.
  * @author blazerbots
  */
 public class IncrementDriveRatio extends CommandBase {

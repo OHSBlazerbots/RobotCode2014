@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Latch the shooter in place with the hook.
  * @author blazerbots
  */
 public class Latch extends CommandBase {

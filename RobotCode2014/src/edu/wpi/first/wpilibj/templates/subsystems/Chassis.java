@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.Gyro;
@@ -14,7 +10,7 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Deals with drive train and sensor assets.
  * @author sgoldman
  */
 public class Chassis extends Subsystem {

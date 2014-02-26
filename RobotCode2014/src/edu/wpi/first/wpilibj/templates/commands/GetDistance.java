@@ -8,7 +8,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Get and send the distance received form the sonar.
  * @author blazerbots
  */
 public class GetDistance extends CommandBase {

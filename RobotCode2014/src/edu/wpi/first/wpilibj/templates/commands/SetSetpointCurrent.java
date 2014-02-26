@@ -7,7 +7,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Set the setpoint for auto turning.
  * @author blazerbots
  */
 public class SetSetpointCurrent extends CommandBase{

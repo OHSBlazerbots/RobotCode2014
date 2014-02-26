@@ -5,7 +5,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Turn on/off the ball following function.
  * @author sgoldman
  */
 public class ToggleBallFollowing extends CommandBase {

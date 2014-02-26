@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Stop unwinding the pullback cord.
  * @author blazerbots
  */
 public class StopRelease extends CommandBase {

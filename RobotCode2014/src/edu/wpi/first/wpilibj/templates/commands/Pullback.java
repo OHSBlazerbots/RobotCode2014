@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Open the latch and pull the shooter back.
  * @author blazerbots
  */
 public class Pullback extends CommandBase {

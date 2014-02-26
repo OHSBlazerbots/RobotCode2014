@@ -6,7 +6,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 
 
 /**
- *
+ * Get data from the network.
  * @author sgoldman
  */
 public class GetNetworkData extends CommandBase {

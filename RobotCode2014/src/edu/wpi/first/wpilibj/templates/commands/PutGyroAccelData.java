@@ -9,7 +9,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Get and put the gyro and accel data.
  * @author blazerbots
  */
 public class PutGyroAccelData extends CommandBase{

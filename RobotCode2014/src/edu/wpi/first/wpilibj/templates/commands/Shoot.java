@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Release the latch.
  * @author blazerbots
  */
 public class Shoot extends CommandBase {

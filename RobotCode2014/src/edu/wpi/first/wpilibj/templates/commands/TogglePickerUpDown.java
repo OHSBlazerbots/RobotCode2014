@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Change the picker's position.
  * @author blazerbots
  */
 public class TogglePickerUpDown extends CommandBase {

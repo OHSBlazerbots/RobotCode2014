@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 
 /**
- *
+ * This command drives the robot to a distance from which it can shoot.
+ * One time run.
  * @author jmuller4
  */
 public class AutoTarget extends CommandBase {

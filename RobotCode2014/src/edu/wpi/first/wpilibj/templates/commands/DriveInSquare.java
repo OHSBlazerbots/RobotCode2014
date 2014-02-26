@@ -8,7 +8,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
+ * Practice command for driving in a square.
  * @author blazerbots
  */
 public class DriveInSquare extends CommandGroup {

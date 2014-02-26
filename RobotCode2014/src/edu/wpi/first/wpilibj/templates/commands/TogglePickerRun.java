@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Turn on/off the picker.
  * @author blazerbots
  */
 public class TogglePickerRun extends CommandBase {

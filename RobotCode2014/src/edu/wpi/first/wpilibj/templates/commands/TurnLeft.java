@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.wpi.first.wpilibj.templates.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 
 
 /**
- *
+ * Turn left.
  * @author sgoldman
  */
 public class TurnLeft extends CommandBase {

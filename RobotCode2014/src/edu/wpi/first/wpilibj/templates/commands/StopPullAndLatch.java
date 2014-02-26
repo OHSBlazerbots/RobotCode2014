@@ -6,7 +6,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Stop pulling the shooter and latch it in place.
  * @author blazerbots
  */
 public class StopPullAndLatch extends CommandBase {

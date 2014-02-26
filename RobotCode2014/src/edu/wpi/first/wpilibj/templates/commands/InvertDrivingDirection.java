@@ -5,7 +5,7 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- *
+ * Invert the driving controls by negating the drive ratio.
  * @author jmuller4
  */
 public class InvertDrivingDirection extends CommandBase {

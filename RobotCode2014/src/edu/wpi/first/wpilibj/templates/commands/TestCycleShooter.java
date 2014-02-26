@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * Cycle shooter with times modified for testing purposes.
  * @author blazerbots
  */
 public class TestCycleShooter extends CommandBase {
@@ -31,7 +31,6 @@ public class TestCycleShooter extends CommandBase {
         Timer.delay(5);
         //Pullback
         shooter.runShooter(pullbackSpeed, pullback);
-        Timer.delay(4);
         //Latch
         shooter.setServoAngle(15);
         Timer.delay(5);
