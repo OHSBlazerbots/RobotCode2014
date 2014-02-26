@@ -12,10 +12,12 @@ package edu.wpi.first.wpilibj.templates.commands;
  */
 public class DecrementDriveRatio extends CommandBase{
     public DecrementDriveRatio(){
+        //Change chassis properties
         requires(chassis);
     }
 
     protected void initialize() {
+        //Try to decrease the ratio
         chassis.decrementRatio();
     }
 
@@ -23,6 +25,7 @@ public class DecrementDriveRatio extends CommandBase{
    }
 
     protected boolean isFinished() {
+        //Only do it once
         return true;
     }
 

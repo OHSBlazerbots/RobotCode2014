@@ -44,7 +44,7 @@ public class Network extends Subsystem{
      */
     public double getNetworkVariable(String s) {
         try {
-            //System.out.println(s + ":" + server.getNumber(s, -1));
+            //Get number
             return server.getNumber(s, -1);
             
         }

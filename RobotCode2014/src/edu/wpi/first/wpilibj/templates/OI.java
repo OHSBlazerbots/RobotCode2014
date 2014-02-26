@@ -27,8 +27,9 @@ import java.io.*;
 public class OI {
 
     //The robot controllers
-    Joystick joystick = new Joystick(RobotMap.JOYSTICK_PORT),
-            joystick2 = new Joystick(RobotMap.JOYSTICK2_PORT);
+    Joystick joystick = new Joystick(RobotMap.JOYSTICK_PORT), // Driver
+            joystick2 = new Joystick(RobotMap.JOYSTICK2_PORT); //Co-Driver
+
     //The buttons on the controllers
     private final JoystickButton speedUp,
             slowDown,
@@ -42,22 +43,22 @@ public class OI {
             testButton;
 
     public OI() {
-        
+
         //Driver
         //Create buttons
         speedUp = new JoystickButton(joystick, 3);
         slowDown = new JoystickButton(joystick, 1);
         autoTarget = new JoystickButton(joystick, 8);
-        invertDrivingDirection = new JoystickButton (joystick, 2);
+        invertDrivingDirection = new JoystickButton(joystick, 2);
         testButton = new JoystickButton(joystick, 10);
-        
+
         //What do the buttons do?
         speedUp.whenPressed(new DecrementDriveRatio());
         slowDown.whenPressed(new IncrementDriveRatio());
         autoTarget.whenPressed(new AutoTarget());
         invertDrivingDirection.whenPressed(new InvertDrivingDirection());
         testButton.whenPressed(new AutomaticTesting());
-        
+
         //Co Driver
         //Create buttons
         togglePickerUpDown = new JoystickButton(joystick2, 3);
@@ -65,11 +66,12 @@ public class OI {
         shootCycle = new JoystickButton(joystick2, 4);
         releaseShooter = new JoystickButton(joystick2, 2);
         shoot = new JoystickButton(joystick2, 8);
-        
+
         //What do the buttons do?
         togglePickerUpDown.whenPressed(new TogglePickerUpDown());
         togglePickerWheels.whenPressed(new TogglePickerRun());
         shootCycle.whenPressed(new CycleShooter());
+        
 //Manual pullback/shoot
 //        shootCycle.whenPressed(new Pullback());
 //        shootCycle.whenReleased(new StopPullAndLatch());
@@ -80,6 +82,6 @@ public class OI {
 
     //Returns the joystick that controls driving
     public Joystick getJoystick() {
-        return joystick;
+        return joystick; //Driver
     }
 }

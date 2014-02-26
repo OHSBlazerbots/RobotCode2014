@@ -20,12 +20,14 @@ public class Picker extends Subsystem {
     
     // Declare properties of the Picker
     Relay relay;
+    //solenoids
     DoubleSolenoid solenoid, solenoid2;
-    //DoubleSolenoid solenoid2;
+    //The compressor
     Compressor compressing;
     
     // Constructor
     public Picker(int cChannel, int fwdSolenoidChannel, int revSolenoidChannel, int fwdSolenoidChannel2, int revSolenoidChannel2, int pressureSwitchControl, int compressorRelayChannel ) {
+        //Start everything
         relay = new Relay(cChannel);
         solenoid = new DoubleSolenoid(fwdSolenoidChannel, revSolenoidChannel);
         solenoid2 = new DoubleSolenoid(fwdSolenoidChannel2, revSolenoidChannel2);

@@ -10,13 +10,15 @@ package edu.wpi.first.wpilibj.templates.commands;
  * @author blazerbots
  */
 public class Shoot extends CommandBase {
-    
+
     public Shoot() {
+        //We need a shooter to unlatch
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Unlatch hook
         shooter.setServoAngle(110);
     }
 
@@ -26,6 +28,7 @@ public class Shoot extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

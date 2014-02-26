@@ -12,11 +12,12 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class IncrementDriveRatio extends CommandBase {
 
     public IncrementDriveRatio() {
-        // Use requires() here to declare subsystem dependencies
+        // we need to change chassis values
         requires(chassis);
     }
 
     protected void initialize() {
+        //Increment ratio
         chassis.incrementRatio();
     }
 

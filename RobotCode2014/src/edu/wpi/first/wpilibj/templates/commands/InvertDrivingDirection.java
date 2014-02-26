@@ -11,11 +11,13 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class InvertDrivingDirection extends CommandBase {
     
     public InvertDrivingDirection() {
+        //We need to change chassis values
         requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Negate ratio
         chassis.negatetRatio();
     }
 
@@ -25,6 +27,7 @@ public class InvertDrivingDirection extends CommandBase {
 
     // This command is always finished because there is nothing in execute
     protected boolean isFinished() {
+        //Do this once
         return true;
     }
 

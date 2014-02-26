@@ -14,11 +14,12 @@ public class SetSetpointCurrent extends CommandBase{
 
     public SetSetpointCurrent()
     {
+        //Need chassis to change its data
         requires(chassis);
     }
     
     protected void initialize() {
-        System.out.println("Setting setpoint now: ");
+        //Set setpoint
         chassis.setGyroSetpoint();
     }
 
@@ -26,6 +27,7 @@ public class SetSetpointCurrent extends CommandBase{
     }
 
     protected boolean isFinished() {
+        //Do this once
         return true;
     }
 

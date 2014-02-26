@@ -19,7 +19,7 @@ public class RobotMap {
 
     // Analog
     public static final int GYRO_PORT = 1;
-    public static final int SONAR_PORT = 1;
+    public static final int SONAR_PORT = 7;
 
     // Joysticks
     public static final int JOYSTICK_PORT = 2;

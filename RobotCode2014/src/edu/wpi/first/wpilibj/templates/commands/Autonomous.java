@@ -4,11 +4,7 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import edu.wpi.first.wpilibj.command.WaitUntilCommand;
-import edu.wpi.first.wpilibj.command.PrintCommand;
 
 /**
  *
@@ -28,6 +24,8 @@ public class Autonomous extends CommandGroup {
 //            addSequential(new WaitUntilCommand(6));
 //        }
         //addSequential(new Turn(90));
-        //addSequential(new CycleShooter());
+        
+        //Shoot
+        addSequential(new CycleShooter());
     }
 }

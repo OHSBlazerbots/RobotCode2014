@@ -18,6 +18,7 @@ public class ToggleBallFollowing extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Tell the chassis we are no longer following the ball
         chassis.disableBallFollowing();
     }
 
@@ -27,6 +28,7 @@ public class ToggleBallFollowing extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

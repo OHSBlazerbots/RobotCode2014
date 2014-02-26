@@ -17,6 +17,7 @@ public class ReleaseShooter extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Run the shooter pullback backwards
         shooter.runShooter(-.5);
     }
 
@@ -26,6 +27,7 @@ public class ReleaseShooter extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Will run until button is released
         return true;
     }
 

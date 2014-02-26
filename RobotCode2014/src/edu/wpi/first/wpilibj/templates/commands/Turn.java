@@ -13,19 +13,22 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Turn extends CommandBase {
 
+    //How much to turn
     private double degrees;
     private GoToSetPoint gTSP;
+    
     public Turn(double d) {
         requires(chassis);
+        //Set turning
         this.degrees = d;
         gTSP =  new GoToSetPoint();
     }
 
     protected void initialize() {
-        System.out.println("Turn(Start)");
+        //Turn
         chassis.turn(this.degrees);
+        //Go
         gTSP.initialize();
-        System.out.println("Turn(End)");
     }
 
     protected void execute() {
@@ -34,6 +37,7 @@ public class Turn extends CommandBase {
     }
 
     protected boolean isFinished() {
+        //We are done if gTSP is
         System.out.println("Turn.isFinished");
         if (gTSP.isFinished()) {
             System.out.println("Turn finished");

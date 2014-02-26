@@ -17,6 +17,7 @@ public class StopRelease extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Stop shooter
         shooter.stopShooter();
     }
 
@@ -26,6 +27,7 @@ public class StopRelease extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

@@ -14,15 +14,16 @@ public class ToggleAutoTurn extends CommandBase {
     private GoToSetPoint goToSetPoint;
 
     public ToggleAutoTurn() {
+        //Need chassis so we can turn
         requires(chassis);
     }
 
     protected void initialize() {
+        //If already turning, stop
         if (chassis.getState() == 2) {
-            System.out.println("Stop turning");
             chassis.stopGoingToSetPoint();
         } else {
-            System.out.println("Turning to setpoint");
+            //Else start
             chassis.goToSetPoint();
             goToSetPoint = new GoToSetPoint();
             goToSetPoint.start();

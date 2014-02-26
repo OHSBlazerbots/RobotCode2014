@@ -12,12 +12,15 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class StopPullAndLatch extends CommandBase {
     
     public StopPullAndLatch() {
+        //Need shooter
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Latch
         shooter.setServoAngle(15);
+        //Stop pulling
         shooter.stopShooter();
     }
 

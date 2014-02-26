@@ -18,20 +18,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author sgoldman
  */
 public class Chassis extends Subsystem {
-    //new RBDrive
 
+    //Our drive code
     public static RobotDrive drive;
     // Determines what type of driving, (auto, joystick...) we are doing
     // Joystick = 0
     // Auto = 1
     // Ball Track  = 2
     private static int driveState;
+    //Manipulates our driving
     private static double ratio;
+    //Are only driving straight, or only turning
     private boolean driveStraight, onlyTurn;
+    //The gryo
     private Gyro gyro;
-    //private Accelerometer accelerometerX;
-    //private Accelerometer accelerometerY;
+    //Accel
     private ADXL345_I2C accel;
+    //All sorts of vars
     private double setPoint,
             velocityX,
             velocityY,
@@ -40,22 +43,27 @@ public class Chassis extends Subsystem {
             tiltErrorX,
             tiltErrorY,
             distance;
+    //The sonar
     private AnalogChannel sonar;
 
     /**
      * Create an instance of the chassis class with the appropriate motors.
-     *motors
+     * motors
+     *
      * @param frontLeftMotor
      * @param rearLeftMotor
      * @param frontRightMotor
      * @param rearRightMotor
      */
     public Chassis(int frontLeftMotor, int frontRightMotor, int rearLeftMotor, int rearRightMotor, int gyroPort, int sonarPort) {
+        //Ratio starts at 1
         ratio = 1;
+
         velocityX = 0;
         velocityY = 0;
         distanceX = 0;
         distanceY = 0;
+        //We are starting driving normally
         driveStraight = false;
         onlyTurn = false;
         //Create new robot drive class with pin values for the two motors
@@ -107,7 +115,9 @@ public class Chassis extends Subsystem {
         {
             //move = 0;
         }
-        drive.arcadeDrive(move, turn);
+        //For new robot:
+        //drive.arcadeDrive(move, turn);
+        drive.arcadeDrive(turn, move);
     }
 
     public void drive(double move, double turn) {
@@ -124,7 +134,9 @@ public class Chassis extends Subsystem {
 //        if (getSonarDistance() < 24.0 && move < 0) {
 //            move = 0;
 //        }
-        drive.arcadeDrive(move, turn);
+        //For new robot:
+        //drive.arcadeDrive(move, turn);
+        drive.arcadeDrive(turn, move);
     }
 
     /**
@@ -265,6 +277,7 @@ public class Chassis extends Subsystem {
         driveState = 2;
     }
 
+    //Calculate and return sonar
     public double getSonarDistance() {
         double r = SmartDashboard.getNumber("Sonar Number", 4.0);
         double d = (sonar.getValue() / r * 2 / 2.54);
@@ -275,10 +288,12 @@ public class Chassis extends Subsystem {
         return distance;
     }
 
+    //Reverse the ratio
     public void negatetRatio() {
         this.ratio *= -1;
     }
 
+    //Set the setpoint
     public void setSetPoint(double degrees) {
         this.setPoint = degrees;
     }

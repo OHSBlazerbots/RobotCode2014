@@ -15,15 +15,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class CycleShooter extends CommandBase {
     
     public CycleShooter() {
+        //We need to shoot
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Place the data
         double pullback = SmartDashboard.getNumber("PullbackConfig", 6.0);
         double unwind = SmartDashboard.getNumber("UnwindConfig", 6.0);
         double pullbackSpeed = SmartDashboard.getNumber("PullbackSpeed", .5);
         double unwindSpeed = SmartDashboard.getNumber("UnwindSpeed", .5);
+        
         //Fire
         shooter.setServoAngle(110);
         //Wait

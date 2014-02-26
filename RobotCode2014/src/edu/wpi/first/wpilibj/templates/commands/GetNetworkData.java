@@ -23,6 +23,7 @@ public class GetNetworkData extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     // Get COG x and y
     protected void execute() {
+        //Get data
         double var1 = network.getNetworkVariable("COG_X");
         double var2 = network.getNetworkVariable("COG_Y");
         

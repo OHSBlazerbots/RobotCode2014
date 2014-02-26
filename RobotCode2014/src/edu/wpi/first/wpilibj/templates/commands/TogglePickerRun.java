@@ -17,6 +17,7 @@ public class TogglePickerRun extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Check the state of the picker and switch it the other way
         if(picker.getTurningState())
         {
             picker.turnOff();
@@ -33,6 +34,7 @@ public class TogglePickerRun extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

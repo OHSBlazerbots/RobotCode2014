@@ -12,12 +12,15 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class Pullback extends CommandBase {
     
     public Pullback() {
+        //We need the shooter to be able to pullback
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Open up so that the bar can enter
         shooter.setServoAngle(110);
+        //Run the shooter pullback
         shooter.runShooter(.5);
     }
 
@@ -27,6 +30,7 @@ public class Pullback extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //The motor will run until the button is released
         return true;
     }
 

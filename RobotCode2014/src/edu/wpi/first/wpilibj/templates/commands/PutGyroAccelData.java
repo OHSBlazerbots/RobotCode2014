@@ -16,6 +16,7 @@ public class PutGyroAccelData extends CommandBase{
 
     public PutGyroAccelData()
     {
+        //To get  data
         requires(chassis);
     }
     
@@ -24,13 +25,16 @@ public class PutGyroAccelData extends CommandBase{
     }
 
     protected void execute() {
+        //Put gyro data
         SmartDashboard.putNumber("Angle: ", chassis.getGyroAngle());
+        //Get and put accel data
         double[] a = chassis.getAcceleration();
         SmartDashboard.putNumber("A-X: ", a[0]);
         SmartDashboard.putNumber("A-Y: ", a[1]);
     }
 
     protected boolean isFinished() {
+        //Don't stop
         return false;
     }
 

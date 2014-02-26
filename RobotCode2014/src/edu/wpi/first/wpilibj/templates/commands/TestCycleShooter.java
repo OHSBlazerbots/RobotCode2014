@@ -20,6 +20,7 @@ public class TestCycleShooter extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Put data
         double pullback = SmartDashboard.getNumber("PullbackConfig", 6.0);
         double unwind = SmartDashboard.getNumber("UnwindConfig", 6.0);
         double pullbackSpeed = SmartDashboard.getNumber("PullbackSpeed", .5);
@@ -44,6 +45,7 @@ public class TestCycleShooter extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

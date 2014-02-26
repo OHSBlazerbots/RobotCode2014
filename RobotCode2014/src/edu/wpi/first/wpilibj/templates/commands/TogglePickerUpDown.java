@@ -17,6 +17,7 @@ public class TogglePickerUpDown extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //If picker is up, put it down, else pull it up
         if(picker.getExtendedState())
         {
             picker.pickerUp();
@@ -32,6 +33,7 @@ public class TogglePickerUpDown extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do once
         return true;
     }
 

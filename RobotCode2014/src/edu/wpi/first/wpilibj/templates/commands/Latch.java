@@ -12,11 +12,13 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class Latch extends CommandBase {
     
     public Latch() {
+        //We need the shooter to latch
         requires(shooter);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Set the servo to the latch position
         shooter.setServoAngle(15);
     }
 
@@ -26,6 +28,7 @@ public class Latch extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Do this once
         return true;
     }
 

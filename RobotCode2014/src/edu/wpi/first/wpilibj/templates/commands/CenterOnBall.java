@@ -11,13 +11,15 @@ package edu.wpi.first.wpilibj.templates.commands;
 public class CenterOnBall extends CommandBase {
 
     public CenterOnBall() {
-        // Use requires() here to declare subsystem dependencies
+        //We need to get the ball's position
         requires(network);
+        //We need to move
         requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        //Tell the chassis we are following the ball
         chassis.enableBallFollowing();
     }
 
@@ -47,6 +49,7 @@ public class CenterOnBall extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+        //Finish when the driver tells us to
         return (chassis.getState() != 1);
     }
 

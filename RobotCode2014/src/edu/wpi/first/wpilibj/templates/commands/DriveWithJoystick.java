@@ -25,7 +25,10 @@ public class DriveWithJoystick extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        //Turn with joystick
         chassis.driveWithJoyStick(oi.getJoystick());
+        
+        //Place data: needs to move
         //SmartDashboard.putNumber("Current Angle: ", chassis.getGyroAngle());
         //SmartDashboard.putNumber("X: ", chassis.getAcceleration()[0]);
         //SmartDashboard.putNumber("Y: ", chassis.getAcceleration()[1]);

@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 import edu.wpi.first.wpilibj.templates.subsystems.Network;
 import edu.wpi.first.wpilibj.templates.subsystems.Picker;
 import edu.wpi.first.wpilibj.templates.subsystems.Shooter;
-import com.sun.squawk.ResourceFile;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
