@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Deals with shooter assets.
  * @author jmuller4
  */
 public class Shooter extends Subsystem {
