@@ -5,6 +5,8 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
+import edu.wpi.first.wpilibj.templates.RobotValues;
+
 /**
  * Open the latch and pull the shooter back.
  * @author blazerbots
@@ -18,8 +20,9 @@ public class Pullback extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println(this.getClass().getName() + " : " + System.currentTimeMillis());
         //Open up so that the bar can enter
-        shooter.setServoAngle(110);
+        shooter.setServoAngle(RobotValues.SERVO_UNLATCH);
         //Run the shooter pullback
         shooter.runShooter(.5);
     }

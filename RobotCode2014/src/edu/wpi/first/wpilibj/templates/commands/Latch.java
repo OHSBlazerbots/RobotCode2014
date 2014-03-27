@@ -5,6 +5,8 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
+import edu.wpi.first.wpilibj.templates.RobotValues;
+
 /**
  * Latch the shooter in place with the hook.
  * @author blazerbots
@@ -19,7 +21,7 @@ public class Latch extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
         //Set the servo to the latch position
-        shooter.setServoAngle(15);
+            shooter.setServoAngle(RobotValues.SERVO_LATCH);
     }
 
     // Called repeatedly when this Command is scheduled to run

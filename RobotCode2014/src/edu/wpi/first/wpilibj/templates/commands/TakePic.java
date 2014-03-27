@@ -6,20 +6,18 @@
 package edu.wpi.first.wpilibj.templates.commands;
 
 /**
- * Unwind the the pullback cord.
+ *
  * @author blazerbots
  */
-public class ReleaseShooter extends CommandBase {
+public class TakePic extends CommandBase {
     
-    public ReleaseShooter() {
-        requires(shooter);
+    public TakePic() {
+        requires(camera);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        System.out.println(this.getClass().getName());
-        //Run the shooter pullback backwards
-        shooter.runShooter(-.5);
+        camera.snapShot();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +26,6 @@ public class ReleaseShooter extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //Will run until button is released
         return true;
     }
 

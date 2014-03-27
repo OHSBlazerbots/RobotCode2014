@@ -3,6 +3,7 @@ package edu.wpi.first.wpilibj.templates.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.templates.OI;
 import edu.wpi.first.wpilibj.templates.RobotMap;
+import edu.wpi.first.wpilibj.templates.subsystems.Camera;
 import edu.wpi.first.wpilibj.templates.subsystems.Chassis;
 import edu.wpi.first.wpilibj.templates.subsystems.Network;
 import edu.wpi.first.wpilibj.templates.subsystems.Picker;
@@ -22,6 +23,7 @@ public abstract class CommandBase extends Command {
     public static Network network = new Network();
     public static Picker picker = new Picker(RobotMap.PICKER_SPIKE, RobotMap.SOLENOID_FORWARD, RobotMap.SOLENOID_BACK, RobotMap.SOLENOID2_FORWARD, RobotMap.SOLENOID2_BACK, RobotMap.COMPRESSOR_SENSOR, RobotMap.COMPRESSOR);
     public static Shooter shooter = new Shooter(RobotMap.SHOOTER_SPIKE, RobotMap.SERVO_PORT);
+    public static Camera camera = new Camera();
     
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely

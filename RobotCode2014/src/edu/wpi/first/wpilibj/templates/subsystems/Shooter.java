@@ -27,6 +27,7 @@ public class Shooter extends Subsystem {
     public Shooter(int channel, int servoChannel) {
         relay = new Relay(channel);
         servo = new Servo(servoChannel);
+        System.out.println(getServoAngle());
     }
 
     public void initDefaultCommand() {
@@ -36,6 +37,7 @@ public class Shooter extends Subsystem {
 
     //Run the pullback mechanism
     public void runShooter(double speed) {
+        System.out.println("Shooter speed: " + speed);
         if (speed > 0) {
             relay.set(Relay.Value.kForward);
         }
@@ -77,6 +79,7 @@ public class Shooter extends Subsystem {
     //Set servo angle
     public void setServoAngle(double d)
     {
+        System.out.println("Servo: " + d);
         servo.setAngle(d);
     }
     

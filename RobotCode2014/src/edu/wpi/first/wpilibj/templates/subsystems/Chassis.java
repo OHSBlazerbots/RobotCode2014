@@ -89,7 +89,7 @@ public class Chassis extends Subsystem {
      */
     public void driveWithJoyStick(Joystick joystick) {
         //Turn is the reverse of x
-        double turn = -joystick.getX();
+        double turn = joystick.getX();
         //Drive is the y
         double move = joystick.getY();
         //Slow the robot down with the ratio
@@ -113,7 +113,7 @@ public class Chassis extends Subsystem {
         }
         //For new robot:
         //drive.arcadeDrive(move, turn);
-        drive.arcadeDrive(turn, move);
+        drive.arcadeDrive(move, turn);
     }
 
     public void drive(double move, double turn) {
@@ -132,7 +132,7 @@ public class Chassis extends Subsystem {
 //        }
         //For new robot:
         //drive.arcadeDrive(move, turn);
-        drive.arcadeDrive(turn, move);
+        drive.arcadeDrive(move, turn);
     }
 
     /**

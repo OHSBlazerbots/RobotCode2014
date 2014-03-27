@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.templates.commands.ReleaseShooter;
 import edu.wpi.first.wpilibj.templates.commands.Shoot;
 import edu.wpi.first.wpilibj.templates.commands.StopPullAndLatch;
 import edu.wpi.first.wpilibj.templates.commands.StopRelease;
+import edu.wpi.first.wpilibj.templates.commands.TakePic;
 import edu.wpi.first.wpilibj.templates.commands.TogglePickerRun;
 import edu.wpi.first.wpilibj.templates.commands.TogglePickerUpDown;
 import java.io.*;
@@ -40,8 +41,14 @@ public class OI {
             releaseShooter,
             shoot,
             invertDrivingDirection,
-            testButton;
+            testButton,
+            latch,
+            snapShot;
+            //setupShooter;
 
+    /**
+     *
+     */
     public OI() {
 
         //Driver
@@ -66,18 +73,23 @@ public class OI {
         shootCycle = new JoystickButton(joystick2, 4);
         releaseShooter = new JoystickButton(joystick2, 2);
         shoot = new JoystickButton(joystick2, 8);
+        latch = new JoystickButton(joystick2, 10);
+//        setupShooter = new JoystickButton(joystick2, 10);
+        snapShot = new JoystickButton(joystick2, 6);
 
         //What do the buttons do?
         togglePickerUpDown.whenPressed(new TogglePickerUpDown());
         togglePickerWheels.whenPressed(new TogglePickerRun());
-        shootCycle.whenPressed(new CycleShooter());
+        snapShot.whenPressed(new TakePic());
+        //shootCycle.whenPressed(new CycleShooter());
         
 //Manual pullback/shoot
-//        shootCycle.whenPressed(new Pullback());
-//        shootCycle.whenReleased(new StopPullAndLatch());
-//        releaseShooter.whenPressed(new ReleaseShooter());
-//        releaseShooter.whenReleased(new StopRelease());
-//        shoot.whenPressed(new Shoot());
+        shootCycle.whenPressed(new Pullback());
+        shootCycle.whenReleased(new StopPullAndLatch());
+        releaseShooter.whenPressed(new ReleaseShooter());
+        releaseShooter.whenReleased(new StopRelease());
+        shoot.whenPressed(new Shoot());
+        latch.whenPressed(new Latch());
     }
 
     //Returns the joystick that controls driving

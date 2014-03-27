@@ -5,6 +5,8 @@
  */
 package edu.wpi.first.wpilibj.templates.commands;
 
+import edu.wpi.first.wpilibj.templates.RobotValues;
+
 /**
  * Stop pulling the shooter and latch it in place.
  * @author blazerbots
@@ -18,8 +20,9 @@ public class StopPullAndLatch extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        System.out.println(this.getClass().getName() + " : " + System.currentTimeMillis());
         //Latch
-        shooter.setServoAngle(15);
+        shooter.setServoAngle(RobotValues.SERVO_LATCH);
         //Stop pulling
         shooter.stopShooter();
     }
