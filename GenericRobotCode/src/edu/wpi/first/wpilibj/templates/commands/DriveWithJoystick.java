@@ -27,13 +27,6 @@ public class DriveWithJoystick extends CommandBase {
     protected void execute() {
         //Turn with joystick
         chassis.driveWithJoyStick(oi.getJoystick());
-        
-        //Place data: needs to move
-        //SmartDashboard.putNumber("Current Angle: ", chassis.getGyroAngle());
-        //SmartDashboard.putNumber("X: ", chassis.getAcceleration()[0]);
-        //SmartDashboard.putNumber("Y: ", chassis.getAcceleration()[1]);
-        SmartDashboard.putNumber("Sonar", chassis.getSonarDistance());
-        System.out.println(shooter.getServoAngle());
     }
 
     // Make this return true when this Command no longer needs to run execute()

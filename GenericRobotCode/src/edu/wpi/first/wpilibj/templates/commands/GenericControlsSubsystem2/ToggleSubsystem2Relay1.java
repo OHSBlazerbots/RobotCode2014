@@ -1,36 +1,38 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.wpi.first.wpilibj.templates.commands.GenericControlsSubsystem2;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Relay.Value;
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
- * Get and send the distance received form the sonar.
- * @author blazerbots
+ *
+ * @author sgoldman
  */
-public class GetDistance extends CommandBase {
-    
-    public GetDistance() {
-        // Use requires() here to declare subsystem dependencies
-        requires(chassis);
-        requires(network);
+public class ToggleSubsystem2Relay1 extends CommandBase {
+
+    public ToggleSubsystem2Relay1() {
+        requires(subsystem2);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        if (subsystem2.getRelay1State().equals(Value.kOn)) {
+            subsystem2.relay1Off();
+        } else {
+            subsystem2.relay1On();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-        SmartDashboard.putNumber("Sonar", chassis.getSonarDistance());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

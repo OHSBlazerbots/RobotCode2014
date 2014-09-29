@@ -80,19 +80,6 @@ public class SubsystemOne extends Subsystem {
     }
 
     /**
-     * Run the motor attached to relay 1 for a specified amount of time.
-     *
-     * @param seconds the number of seconds to run the motor.
-     */
-    public void runRelay1(double seconds) {
-        if (relay1 != null) {
-            relay1On();
-            Timer.delay(seconds);
-            relay1Off();
-        }
-    }
-
-    /**
      * Turn the motor attached to relay 2 on
      */
     public void relay2On() {
@@ -124,19 +111,6 @@ public class SubsystemOne extends Subsystem {
     }
 
     /**
-     * Run the motor attached to relay 2 for a specified amount of time.
-     *
-     * @param seconds the number of seconds to run the motor.
-     */
-    public void runRelay2(double seconds) {
-        if (relay2 != null) {
-            relay2On();
-            Timer.delay(seconds);
-            relay2Off();
-        }
-    }
-
-    /**
      * Run the motor attached to jaguar 1 at the specified speed
      *
      * @param speed the speed to run the motor at. Between -1 and 1.
@@ -159,21 +133,6 @@ public class SubsystemOne extends Subsystem {
     public void stopJag1() {
         if (jag1 != null) {
             setJag1Speed(0.0);
-        }
-    }
-
-    /**
-     * Runs the motor attached to jaguar 1 for a specified amount of time at a
-     * certain speed.
-     *
-     * @param speed the speed at which to run the motor
-     * @param seconds how long to run the motor
-     */
-    public void runJag1(double speed, double seconds) {
-        if (jag1 != null) {
-            setJag1Speed(speed);
-            Timer.delay(seconds);
-            stopJag1();
         }
     }
 
@@ -213,21 +172,6 @@ public class SubsystemOne extends Subsystem {
     public void stopJag2() {
         if (jag2 != null) {
             setJag2Speed(0.0);
-        }
-    }
-
-    /**
-     * Runs the motor attached to jaguar 2 for a specified amount of time at a
-     * certain speed.
-     *
-     * @param speed the speed at which to run the motor
-     * @param seconds how long to run the motor
-     */
-    public void runJag2(double speed, double seconds) {
-        if (jag2 != null) {
-            setJag2Speed(speed);
-            Timer.delay(seconds);
-            stopJag2();
         }
     }
 

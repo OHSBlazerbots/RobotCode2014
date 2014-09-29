@@ -1,26 +1,29 @@
-package edu.wpi.first.wpilibj.templates.commands;
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package edu.wpi.first.wpilibj.templates.commands.GenericControlsSubsystem1;
 
-import edu.wpi.first.wpilibj.Timer;
-
+import edu.wpi.first.wpilibj.Relay.Value;
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
- * Turn left.
+ *
  * @author sgoldman
  */
-public class TurnLeft extends CommandBase {
-    private double time, speed;   
-   
-    public TurnLeft(double seconds, double spd) {
-        requires(chassis);
-        this.time = seconds;
-        speed = spd;    
+public class ToggleSubsystem1Relay2 extends CommandBase {
+
+    public ToggleSubsystem1Relay2() {
+        requires(subsystem1);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        chassis.drive(0, speed);
-        new Timer().delay(this.time);
-        chassis.drive(0,0);
+        if (subsystem1.getRelay2State().equals(Value.kOn)) {
+            subsystem1.relay2Off();
+        } else {
+            subsystem1.relay2On();
+        }
     }
 
     // Called repeatedly when this Command is scheduled to run

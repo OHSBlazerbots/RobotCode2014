@@ -2,36 +2,35 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.wpi.first.wpilibj.templates.commands.GenericControlsSubsystem1;
 
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
- * Get data from the network.
+ *
  * @author sgoldman
  */
-public class GetNetworkData extends CommandBase {
+public class SetAngleSubsystem1Servo2 extends CommandBase {
     
-    public GetNetworkData() {
-        //we need a network to get network data
-        requires(network);
+    private double angle;
+    
+    public SetAngleSubsystem1Servo2(double angle) {
+        requires(subsystem1);
+        this.angle = angle;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+        subsystem1.setServo2Angle(angle);
     }
 
     // Called repeatedly when this Command is scheduled to run
-    // Get COG x and y
     protected void execute() {
-        //Get data
-        double var1 = network.getNetworkVariable("COG_X");
-        double var2 = network.getNetworkVariable("COG_Y");
-        
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

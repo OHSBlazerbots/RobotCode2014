@@ -2,24 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.wpi.first.wpilibj.templates.commands.GenericControlsSubsystem1;
+
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
- * Turn on/off the ball following function.
+ *
  * @author sgoldman
  */
-public class ToggleBallFollowing extends CommandBase {
+public class RunSubsystem1Motor2 extends CommandBase {
     
-    public ToggleBallFollowing() {
-        // Use requires() here to declare subsystem dependencies
-        requires(chassis);
-        requires(network);
+    private double speed;
+    
+    public RunSubsystem1Motor2(double speed) {
+        requires(subsystem1);
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //Tell the chassis we are no longer following the ball
-        chassis.disableBallFollowing();
+        subsystem1.setJag2Speed(speed);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +30,6 @@ public class ToggleBallFollowing extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //Do once
         return true;
     }
 

@@ -2,32 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.wpi.first.wpilibj.templates.commands.GenericControlsSubsystem2;
+
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
- * Invert the driving controls by negating the drive ratio.
- * @author jmuller4
+ *
+ * @author sgoldman
  */
-public class InvertDrivingDirection extends CommandBase {
+public class HaltSubsystem2Motor1 extends CommandBase {
     
-    public InvertDrivingDirection() {
-        //We need to change chassis values
-        requires(chassis);
+    public HaltSubsystem2Motor1() {
+       requires(subsystem2);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        //Negate ratio
-        chassis.negatetRatio();
+        subsystem2.stopJag1();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     }
 
-    // This command is always finished because there is nothing in execute
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        //Do this once
         return true;
     }
 
