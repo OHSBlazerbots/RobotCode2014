@@ -1,0 +1,43 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package edu.wpi.first.wpilibj.templates.commands;
+
+/**
+ * Turn on/off the ball following function.
+ * @author sgoldman
+ */
+public class ToggleBallFollowing extends CommandBase {
+    
+    public ToggleBallFollowing() {
+        // Use requires() here to declare subsystem dependencies
+        requires(chassis);
+        requires(network);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+        //Tell the chassis we are no longer following the ball
+        chassis.disableBallFollowing();
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        //Do once
+        return true;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+}
